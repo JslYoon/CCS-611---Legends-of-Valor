@@ -5,7 +5,7 @@ import src.Entities.Players.*;
 import src.Misc.Input;
 import src.Misc.RandomSelection;
 
-public class World {
+public class ValorWorld {
 
     private ArrayList<ArrayList<Spaces>> world;
     private int W_rows;
@@ -15,7 +15,7 @@ public class World {
 
     private final String[] PARTYREPR = {"|\t O\t|", "|\t/|\\\t|", "|\t/ \\\t|"};
     
-    public World(int rows, int cols, Party party) {
+    public ValorWorld(int rows, int cols, Party party) {
         W_rows = rows;
         W_cols = cols;
 
