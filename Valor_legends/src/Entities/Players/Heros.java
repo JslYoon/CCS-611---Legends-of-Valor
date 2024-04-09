@@ -6,6 +6,7 @@ import src.Messages.ErrorMessage;
 import src.Messages.QuestionMessage;
 import src.Misc.Input;
 import src.Misc.RandomSelection;
+import src.World.Coordinate;
 
 import java.util.*;
 
@@ -33,6 +34,8 @@ public class Heros implements Entities {
     private double currExp;
     private double lvlupExp; 
 
+    private Coordinate beginSpace;
+
     public Heros(String name, String role) {
 
         this.level = 1;
@@ -57,6 +60,11 @@ public class Heros implements Entities {
         inventory = new Inventory();
         fightable = true;
 
+    }
+
+    public Heros(String name, String role, Coordinate beginSpace){
+        this(name, role);
+        this.beginSpace = beginSpace;
     }
 
     // ----------------------------------------------------
@@ -92,6 +100,7 @@ public class Heros implements Entities {
     public HashMap<String, Integer> getStats() { return stats; }
     public Items getArmor() { return armor; }
     public Items getWeapon() { return weapon; }
+    public Coordinate getBeginSpace() { return beginSpace; }
 
     public void displayStats() {
 

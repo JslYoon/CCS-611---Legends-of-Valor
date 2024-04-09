@@ -6,13 +6,13 @@ import src.Entities.Entities;
 import src.Entities.Players.Heros;
 import src.Entities.Players.Party;
 import src.Messages.printStatement;
-import src.World.World;
+import src.World.MonsterWorld;
 
 // Game interface object
 
 public class Interface {
 
-    private World world;
+    private MonsterWorld world;
     private int world_r = 8;
     private int world_c = 8;
     private Party myParty = null;
@@ -50,7 +50,7 @@ public class Interface {
     }
 
     private void startGame(Party p) {
-        world = new World(world_r, world_c, p);
+        world = new MonsterWorld(world_r, world_c, p);
         while(true) {
             System.out.println(world);
             int nums = playerInputs(p);
@@ -102,8 +102,6 @@ public class Interface {
                     world.currPartySpace().beginAction(p);
                 }
                 break;
-
-                
         }
     }
 
