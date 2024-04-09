@@ -1,6 +1,0 @@
-Fire Dragon,3,Dragon,20,8,8,1,Fire
-Ice Dragon,6,Dragon,50,7,8,3,Ice
-Earth Exoskeleton,3,Exoskeleton,50,4,6,1,Earth
-Steel Exoskeleton,9,Exoskeleton,60,8,8,1,Steel
-Wind Spirit,4,Spirit,20,5,2,4,Wind
-Water Spirit,9,Spirit,50,8,5,6,Water
