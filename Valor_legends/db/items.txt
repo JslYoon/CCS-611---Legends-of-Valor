@@ -1,0 +1,43 @@
+Armor,Chain Mail,5,200,50
+Armor,Glimmering Breastplate,10,500,80
+Armor,Guardian Helm,3,150,40
+Armor,Helm of Insight,2,120,30
+Armor,Leather Armor,1,100,30
+Armor,Mystic Cloak,8,350,65
+Armor,Plate Armor,3,300,60
+Armor,Ring Mail,2,150,40
+Armor,Shadow Cloak,4,230,45
+Armor,Steel Armor,5,200,50
+Weapon,Arcane Staff,9,415,85
+Weapon,Crossbow,3,250,60
+Weapon,Dagger,1,100,35
+Weapon,Elven Bow,4,350,75
+Weapon,Flame Sword,5,250,60
+Weapon,Golden Bow,18,850,90
+Weapon,Ice Wand,2,120,35
+Weapon,Long Sword,3,200,50
+Weapon,Phantom Blade,6,300,70
+Weapon,Runeblade,12,550,95
+Weapon,Short Sword,2,150,35
+Weapon,Spectral Dagger,8,320,75
+Weapon,Warhammer,3,180,45
+Potion,Elixir of Agility,2,65,20,3,agility
+Potion,Elixir of Fleetness,3,120,20,2,agility
+Potion,Elixir of Strength,4,70,20,2,str
+Potion,Greater Mana Potion,2,60,30,1,mp
+Potion,Healing Potion,1,50,25,2,hp
+Potion,Lesser Healing Potion,1,30,15,2,hp
+Potion,Mana Potion,1,45,30,2,mp
+Potion,Potion of Arcane Power,5,110,25,1,dex
+Potion,Potion of Giant Strength,3,95,20,2,str
+Potion,Swift Foot Potion,1,40,20,3,agility
+Skill,Arcane Blast,4,150,55,3
+Skill,Earthquake,7,220,75,2
+Skill,Fire Shield,5,170,60,4
+Skill,Ice Barrier,8,300,0,6
+Skill,Ice Blast,2,100,60,5
+Skill,Lightning Storm,9,280,80,2
+Skill,Meteor Shower,11,500,100,3
+Skill,Shadow Cloak,3,90,0,6
+Skill,Thunder Strike,5,180,80,4
+Skill,Water Veil,6,190,0,5
