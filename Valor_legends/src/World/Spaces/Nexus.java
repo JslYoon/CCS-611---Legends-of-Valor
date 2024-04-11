@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import src.Behaviors.Behaviors;
 import src.Entities.Entities;
 import src.Entities.Enemies.Monsters;
-import src.Entities.Neutral.NexusEntity;
 import src.Entities.Players.Heros;
 import src.Entities.Players.Party;
 import src.World.Coordinate;
@@ -16,15 +15,15 @@ public class Nexus implements Spaces{
 
     private Party occupied;
     private Coordinate coord = null;
-    private NexusEntity nexus;
+    private Nexus nexus;
 
-    public Nexus(Party p, boolean isHeroNexus) {
-        occupied = p;
-        nexus = new NexusEntity(occupied, isHeroNexus);
+    public Nexus() {
+        occupied = null;
+        nexus = new Nexus();
     }
 
     public Nexus(Party p) {
-        this(p, false);
+        this();
         occupied = p;
     }
 

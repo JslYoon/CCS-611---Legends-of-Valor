@@ -15,7 +15,7 @@ public class ValorWorld {
 
     private final String[] PARTYREPR = {"|\t O\t|", "|\t/|\\\t|", "|\t/ \\\t|"};
     
-    public ValorWorld(int rows, int cols, Party party) {
+    public ValorWorld(int rows, int cols, Party party, int lanes) {
         W_rows = rows;
         W_cols = cols;
 
@@ -23,17 +23,44 @@ public class ValorWorld {
 
         myParty = party;
 
+        
         for(int i = 0; i < rows; i++) {
+            boolean hasNexus = false;
             ArrayList<Spaces> temp = new ArrayList<>();
-            for (int j = 0; j < cols; j++) {
-                Spaces tempSpace = RandomTiles();
-                tempSpace.setCoord(new Coordinate(i, j));
-                temp.add(tempSpace);
+            Spaces tempSpace = new Inaccessible();
+            tempSpace.setCoord(new Coordinate(i, 0));
+            temp.add(tempSpace);
+            for (int k = 0; k < lanes; k++)
+            {
+                for (int j = 1; j < cols; j++) {
+                    Spaces temp2;
+                    if (i == 0) // if enemy nexus
+                        temp2 = new Nexus(null, false);
+                    else if (i == rows - 1) // if our nexus
+                    {
+                        if (hasNexus)
+                            temp2 = new Nexus(null, true);
+                        else
+                        {
+                            temp2 = new Nexus(party, true);
+                            hasNexus = true;
+                        }
+                    }
+                    else
+                        temp2 = RandomTiles();
+                    temp2.setCoord(new Coordinate(i, j + 3 * lanes));
+                    temp.add(temp2);
+                }
+                Spaces temp3 = new Inaccessible();
+                temp3.setCoord(new Coordinate(i, 3 + 3 * lanes));
+                temp.add(temp3);
+                hasNexus = false;
             }
+
             world.add(temp);
         }
-        world.get(0).set(0, new Common(party));
-        partyCoordinate = new Coordinate(0, 0);
+        //world.get(0).set(0, new Common(party));
+        //partyCoordinate = new Coordinate(0, 0);
 
     }
 
@@ -83,10 +110,9 @@ public class ValorWorld {
     // private method to assign tiles randomness in getting the tile type
     private Spaces RandomTiles() {
         HashMap<Spaces, Integer> hs = new HashMap<>();
-        hs.put(new Common(), 70);
-        hs.put(new MarketSpace(), 10);
-        hs.put(new Inaccessible(), 20);
-        
+        hs.put(new Common(), 90);
+        //hs.put(new StatSpace(), 10);
+        hs.put(new MarketSpace(), 10);  // replace with stat space bc its not done yet
         return RandomSelection.KeyProbability(hs);
     }
 
@@ -123,6 +149,12 @@ public class ValorWorld {
                     break;
                 case 'd': // Move right
                     newCoord = partyCoordinate.rightCoord(W_rows, W_cols);
+                    break;
+                case 'r':
+                    // recall
+                    break;
+                case 't':
+                    //tp
                     break;
                 case 'q': // Quit
                     return;

@@ -7,12 +7,14 @@ import src.Entities.Players.Heros;
 import src.Entities.Players.Party;
 import src.Messages.printStatement;
 import src.World.MonsterWorld;
+import src.World.ValorWorld;
 
 // Game interface object
 
 public class Interface {
 
     private MonsterWorld world;
+    private ValorWorld valorWorld;
     private int world_r = 8;
     private int world_c = 8;
     private Party myParty = null;
@@ -50,9 +52,12 @@ public class Interface {
     }
 
     private void startGame(Party p) {
-        world = new MonsterWorld(world_r, world_c, p);
+        // need input for which game to play
+        // world = new MonsterWorld(world_r, world_c, p);
+        // need input for lane size
+        valorWorld = new ValorWorld(world_r, 3, p, 2);
         while(true) {
-            System.out.println(world);
+            System.out.println(valorWorld);
             int nums = playerInputs(p);
             if (nums == -1) {
                 return;
