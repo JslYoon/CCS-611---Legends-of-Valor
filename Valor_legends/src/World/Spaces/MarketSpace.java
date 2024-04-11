@@ -32,10 +32,9 @@ public class MarketSpace implements Spaces {
     public void beginAction(Party p) {
         market = new Market(p);
         for(Entities e: p.getPartyMembers()) {
+            System.out.println(e.getName() + " entering the market");
             market.displayMarket((Heros)e);
         }
-
-        // System.out.println("But nothing happened");
     }
 
     public String spaceType() {

@@ -69,6 +69,17 @@ public class printStatement {
 
     }
 
+    public static boolean uponNexusSpace() {
+
+        System.out.println("===============");
+        System.out.println("This is nexus space");
+        
+        System.out.println("Would you like to enther this space?");
+
+        return Input.untilBooleanInput();
+
+    }
+
 
 
 
