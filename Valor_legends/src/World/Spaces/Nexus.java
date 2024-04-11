@@ -18,13 +18,13 @@ public class Nexus implements Spaces{
     private Coordinate coord = null;
     private NexusEntity nexus;
 
-    public Nexus(Entities e, boolean isHeroNexus) {
-        occupied = e;
+    public Nexus(Party p, boolean isHeroNexus) {
+        occupied = p;
         nexus = new NexusEntity(occupied, isHeroNexus);
     }
 
     public Nexus(Party p) {
-        this();
+        this(p, false);
         occupied = p;
     }
 
