@@ -1,7 +1,5 @@
 package src.World.Spaces;
 
-import javax.swing.text.html.parser.Entity;
-
 import src.Entities.Players.Party;
 import src.World.Coordinate;
 

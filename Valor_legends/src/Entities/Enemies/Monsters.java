@@ -50,7 +50,7 @@ public class Monsters implements Entities{
         return (int)(str * RandomSelection.getRandomMultiplier() * 10);
     }
     public int Defence(int dmg) {
-        int damage = (int)(dmg * (1 + (def * 0.05 + dodge * 0.05)));
+        int damage = (int)(dmg * (1 - (def * 0.05 + dodge * 0.05)));
         hp -= damage;
         if(hp <= 0) {
             hp = 0;

@@ -338,7 +338,7 @@ public class Heros implements Entities {
     }
 
     public String toString() {
-        return role + " " + name + "(lvl " + level + ")";
+        return role + " " + name + "(lvl: " + level + ")" + "(HP: " + getHP() + ")";
     }
 
     
