@@ -5,6 +5,7 @@ package src.World.Spaces;
 public interface StatSpace extends Spaces {
 
     
+
     
 
 }
