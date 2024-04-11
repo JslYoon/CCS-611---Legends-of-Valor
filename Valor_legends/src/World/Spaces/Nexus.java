@@ -64,7 +64,7 @@ public class Nexus implements Spaces{
  
     public String toString() {
         String s = "";
-        s += "|\t" + "common" + "\t|";
+        s += "|\t" + "Nexus" + "\t|";
         return s;
     }
     
