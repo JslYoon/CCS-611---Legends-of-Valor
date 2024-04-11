@@ -1,6 +1,7 @@
 package src.Entities.Neutral;
 
 import src.Entities.Entities;
+import src.Entities.Players.Party;
 import src.Inventory.Inventory;
 import src.Inventory.Items.Items;
 
@@ -8,9 +9,9 @@ public class NexusEntity implements Entities{
 
     private Inventory market;
     private boolean isHeroNexus;
-    private Entities livingEntity;
+    private Party livingEntity;
 
-    public NexusEntity(Entities e, boolean isHeroNexus) {
+    public NexusEntity(Party e, boolean isHeroNexus) {
         
         this.isHeroNexus = isHeroNexus;
         this.livingEntity = e;
@@ -21,7 +22,7 @@ public class NexusEntity implements Entities{
 
     public String getName() {
         if(isHeroNexus) {
-            return livingEntity.getName() + "'s Nexus";
+            return livingEntity.getPartyMembers().get(0).getName() + "'s Nexus";
         } else {
             return "Enemy Nexus";
         }

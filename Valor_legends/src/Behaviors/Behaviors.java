@@ -27,7 +27,13 @@ public class Behaviors {
             List<Entities> yourparty = you.getAlivePartyMembers();
             boolean movemade = false;
             int choose;
+            if(e.getHP() <= 0) {
+                continue;
+            }
             while(true) {
+                if(!me.checkVitals() || !you.checkVitals()) {
+                    return false;
+                }
                 switch(printStatement.battlePrint(e)) {
                     case -1: // tried to quit
                         System.out.print("Cannot quit right now");
@@ -106,7 +112,7 @@ public class Behaviors {
                 if(player.getHP() != 0) {
                     int dmg = e.Attack(null);
                     System.out.println(e + " attacked " + player + " with damage of " + dmg);
-                    System.out.println(player + " gained " + player.Defence(dmg) + " damage.");
+                    System.out.println(player + " recieved " + player.Defence(dmg) + " damage.");
                     return true;
                 }
             }
@@ -118,7 +124,7 @@ public class Behaviors {
 
         ArrayList<Entities> entities = player.getPartyMembers();
         ArrayList<Entities> enemies = new ArrayList<>();
-
+        
         for(int i = 0; i < entities.size(); i++) {
             enemies.add(new Monsters((Heros)entities.get(i)));
         }
@@ -126,12 +132,12 @@ public class Behaviors {
         Party enemyParty = new Party(enemies);
         while(true) {
             Behaviors.Playerbattle(player, enemyParty);
-            if(!enemyParty.checkVitals()) {
+            if(!player.checkVitals() || !enemyParty.checkVitals()) {
                 System.out.println("Congrats you defeated the monsters");
                 return;
             }
             Behaviors.Monsterbattle(enemyParty, player);
-            if(!player.checkVitals()) {
+            if(!player.checkVitals() || !enemyParty.checkVitals()) {
                 System.out.println("You Lost");
                 return;
             }

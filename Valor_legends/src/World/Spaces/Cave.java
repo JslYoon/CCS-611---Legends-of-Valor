@@ -1,46 +1,26 @@
 package src.World.Spaces;
 
-import java.util.ArrayList;
-
-import src.Behaviors.Behaviors;
-import src.Entities.Entities;
-import src.Entities.Enemies.Monsters;
-import src.Entities.Neutral.NexusEntity;
-import src.Entities.Players.Heros;
 import src.Entities.Players.Party;
-import src.World.Coordinate;
 
-// java object to indicate common tile
+public class Cave implements StatSpace {
+    
 
-public class Nexus implements Spaces{
-
-    private Party occupied;
-    private Coordinate coord = null;
-    private NexusEntity nexus;
-
-    public Nexus(Entities e, boolean isHeroNexus) {
-        occupied = e;
-        nexus = new NexusEntity(occupied, isHeroNexus);
+    public Cave() {
+        
     }
 
-    public Nexus(Party p) {
-        this();
-        occupied = p;
-    }
-
-    public void setOccupied(Party p) { 
-        occupied = p;
-    }
+    public void setOccupied(Party p) { occupied = p; }
     public Party getOccupied() { return occupied; }
 
     public void beginAction(Party p) {
-        
-        
+
+        System.out.println("You met enemies");
+        Behaviors.PlayerVsMonster(p);
 
     }
 
     public String spaceType() {
-        return "Nexus";
+        return "Common";
     }
 
     public boolean isPartyHere(){

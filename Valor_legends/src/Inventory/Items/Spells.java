@@ -4,7 +4,7 @@ import javax.swing.text.html.parser.Element;
 
 // Object that represents spells in the game
 
-public class Spells implements Items{
+public class Spells implements Consumeables {
 
 
 

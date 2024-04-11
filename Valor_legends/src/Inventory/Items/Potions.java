@@ -2,7 +2,7 @@ package src.Inventory.Items;
 
 // java object that represents potions
 
-public class Potions implements Items {
+public class Potions implements Consumeables {
 
     private String name;
     private int price;
