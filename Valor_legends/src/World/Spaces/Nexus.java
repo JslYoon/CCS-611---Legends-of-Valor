@@ -15,27 +15,31 @@ public class Nexus implements Spaces{
 
     private Party occupied;
     private Coordinate coord = null;
+    private Nexus nexus;
 
     public Nexus() {
         occupied = null;
+        nexus = new Nexus();
     }
 
     public Nexus(Party p) {
+        this();
         occupied = p;
     }
 
-    public void setOccupied(Party p) { occupied = p; }
+    public void setOccupied(Party p) { 
+        occupied = p;
+    }
     public Party getOccupied() { return occupied; }
 
     public void beginAction(Party p) {
-
-        System.out.println("You met enemies");
-        Behaviors.PlayerVsMonster(p);
+        
+        
 
     }
 
     public String spaceType() {
-        return "Common";
+        return "Nexus";
     }
 
     public boolean isPartyHere(){
