@@ -10,7 +10,7 @@ public class ValorWorld {
     private ArrayList<ArrayList<Spaces>> world;
     private int W_rows;
     private int W_cols;
-    private Coordinate partyCoordinate;
+    private Coordinate partyCoordinate; // change to hash map of key= party value = coords
     private Party myParty;
     private int lanes;
     private int laneWidth;
@@ -113,6 +113,7 @@ public class ValorWorld {
     // private method to assign tiles randomness in getting the tile type
     private Spaces RandomTiles() {
         HashMap<Spaces, Integer> hs = new HashMap<>();
+
         hs.put(new Common(), 85);
         hs.put(new Cave(), 5); 
         hs.put(new Bush(), 5); 
