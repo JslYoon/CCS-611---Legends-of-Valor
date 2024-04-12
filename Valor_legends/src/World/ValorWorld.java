@@ -12,13 +12,16 @@ public class ValorWorld {
     private int W_cols;
     private Coordinate partyCoordinate;
     private Party myParty;
+    private int lanes;
+    private int laneWidth;
 
     private final String[] PARTYREPR = {"|\t O\t|", "|\t/|\\\t|", "|\t/ \\\t|"};
     
-    public ValorWorld(int rows, int cols, Party party, int lanes, int lanesize) {
+    public ValorWorld(int rows, Party party, int lanes, int laneWidth) {
         W_rows = rows;
-        W_cols = cols;
-
+        W_cols = (lanes * (laneWidth + 1)) + 1;
+        this.lanes = lanes;
+        this.laneWidth = laneWidth;
         world = new ArrayList<>();
 
         myParty = party;
@@ -32,7 +35,7 @@ public class ValorWorld {
             temp.add(tempSpace);
             for (int k = 0; k < lanes; k++)
             {
-                for (int j = 1; j < lanesize; j++) {
+                for (int j = 1; j < laneWidth + 1; j++) {
                     Spaces temp2;
                     if (i == 0) // if enemy nexus
                         temp2 = new Nexus(null, false);
@@ -110,9 +113,10 @@ public class ValorWorld {
     // private method to assign tiles randomness in getting the tile type
     private Spaces RandomTiles() {
         HashMap<Spaces, Integer> hs = new HashMap<>();
-        hs.put(new Common(), 90);
-        //hs.put(new StatSpace(), 10);
-        hs.put(new MarketSpace(), 10);  // replace with stat space bc its not done yet
+        hs.put(new Common(), 85);
+        hs.put(new Cave(), 5); 
+        hs.put(new Bush(), 5); 
+        hs.put(new Koulou(), 5); 
         return RandomSelection.KeyProbability(hs);
     }
 

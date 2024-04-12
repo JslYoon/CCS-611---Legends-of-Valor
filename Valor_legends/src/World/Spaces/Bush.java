@@ -4,16 +4,16 @@ import src.Behaviors.Behaviors;
 import src.Entities.Players.Party;
 import src.World.Coordinate;
 
-public class Cave implements StatSpace {
+public class Bush implements StatSpace {
     
     private Coordinate coord;
     private Party occupied;
 
-    public Cave() {
+    public Bush() {
         occupied = null;
     }
 
-    public String statsIncrease() {return "agility"; }
+    public String statsIncrease() {return "dex"; }
     public void setOccupied(Party p) { occupied = p; }
     public Party getOccupied() { return occupied; }
 
@@ -25,7 +25,7 @@ public class Cave implements StatSpace {
     }
 
     public String spaceType() {
-        return "Cave";
+        return "Bush";
     }
 
     public boolean isPartyHere(){
@@ -49,12 +49,12 @@ public class Cave implements StatSpace {
  
     public String toString() {
         String s = "";
-        s += "|\t" + "cave" + "\t|";
+        s += "|\t" + "bush" + "\t|";
         return s;
     }
     
     public String[] getRepr() {
-        String[] r =  {"|\t_/ \\_\t|", "|\t/ C \\\t|", "|\t\\___/\t|"};
+        String[] r =  {"|\t ~~~\t|", "|\t~[B]~\t|", "|\t ~~~\t|"};
         return r;
     }
 
