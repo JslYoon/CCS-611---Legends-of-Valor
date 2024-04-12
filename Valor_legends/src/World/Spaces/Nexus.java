@@ -72,7 +72,7 @@ public class Nexus implements Spaces{
     
    
     public String[] getRepr() {
-        String[] r =  {"|\t /\\ \t|", "|\t -[N]-\t|", "|\t\\ \\/t|"};
+        String[] r =  {"|\t /\\ \t|", "|\t-[N]-\t|", "|\t \\/ \t|"};
         return r;
     }
 

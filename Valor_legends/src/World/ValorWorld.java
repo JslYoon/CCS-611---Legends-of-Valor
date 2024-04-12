@@ -15,7 +15,7 @@ public class ValorWorld {
 
     private final String[] PARTYREPR = {"|\t O\t|", "|\t/|\\\t|", "|\t/ \\\t|"};
     
-    public ValorWorld(int rows, int cols, Party party, int lanes) {
+    public ValorWorld(int rows, int cols, Party party, int lanes, int lanesize) {
         W_rows = rows;
         W_cols = cols;
 
@@ -32,7 +32,7 @@ public class ValorWorld {
             temp.add(tempSpace);
             for (int k = 0; k < lanes; k++)
             {
-                for (int j = 1; j < cols; j++) {
+                for (int j = 1; j < lanesize; j++) {
                     Spaces temp2;
                     if (i == 0) // if enemy nexus
                         temp2 = new Nexus(null, false);

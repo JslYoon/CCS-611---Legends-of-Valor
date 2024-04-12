@@ -55,7 +55,7 @@ public class Interface {
         // need input for which game to play
         // world = new MonsterWorld(world_r, world_c, p);
         // need input for lane size
-        valorWorld = new ValorWorld(world_r, 3, p, 2);
+        valorWorld = new ValorWorld(world_r, 7, p, 2, 3);
         while(true) {
             System.out.println(valorWorld);
             int nums = playerInputs(p);
