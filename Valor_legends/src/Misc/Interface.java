@@ -21,40 +21,82 @@ public class Interface {
     private ArrayList<String> Roles = new ArrayList<>();
     
     public Interface() {
-
+        
         Roles.add("Warrior");
         Roles.add("Sorcerer");
         Roles.add("Paladin");
-        System.out.println("Welcome to monsters and legends!");
-        while(true) {
-            switch(startPage()) {
+        while(true)
+        {
+            switch (startPage()) {
                 case 0:
-                    System.out.println("Goodbye!");
-                    return;
+                    System.out.println("Welcome to monsters and legends!");
+                    while(true) {
+                        switch(startGamePage()) {
+                            case 0:
+                                System.out.println("Goodbye!");
+                                return;
+                            case 1:
+                                Party p = myParty; 
+                                if(myParty == null) {
+                                    p = createParty();
+                                    myParty = p;
+                                }
+                                if (p == null){
+                                    continue;
+                                }
+                                startMonsterGame(p);
+                                break;
+                            case 2:
+                                createMonsterWorld();
+                                break;
+                            case 3:
+                                break;
+                        }
+                    }
+                    
                 case 1:
-                    Party p = myParty; 
-                    if(myParty == null) {
-                        p = createParty();
-                        myParty = p;
+                    System.out.println("Welcome to Legends of Valor!");
+                    while(true) {
+                        switch(startGamePage()) {
+                            case 0:
+                                System.out.println("Goodbye!");
+                                return;
+                            case 1:
+                                //TODO need to change creating party for legends of valor 
+                                Party p = myParty; 
+                                if(myParty == null) {
+                                    p = createParty();
+                                    myParty = p;
+                                }
+                                if (p == null){
+                                    continue;
+                                }
+                                startValorGame(p);
+                                break;
+                            case 2:
+                                createValorWorld();
+                                break;
+                            case 3:
+                                break;
+                        }
                     }
-                    if (p == null){
-                        continue;
-                    }
-                    startGame(p);
-                    break;
-                case 2:
-                    createWorld();
-                    break;
-                case 3:
-                    break;
+            }
+        }
+        
+    }
+
+    private void startMonsterGame(Party p) {
+        world = new MonsterWorld(world_r, world_c, p);
+        while(true) {
+            System.out.println(valorWorld);
+            int nums = playerInputs(p);
+            if (nums == -1) {
+                return;
             }
         }
     }
 
-    private void startGame(Party p) {
-        // need input for which game to play
-        // world = new MonsterWorld(world_r, world_c, p);
-        // need input for lane size
+    private void startValorGame(Party p) {
         valorWorld = new ValorWorld(world_r, p, 2, 2);
         while(true) {
             System.out.println(valorWorld);
@@ -110,8 +152,8 @@ public class Interface {
         }
     }
 
-    private int startPage() {
-       
+    private int startGamePage() {
+
         System.out.println("\nWelcome to the main page, pick an option! :)\n");
         System.out.println("0. Exit");
         System.out.println("1. Begin game");
@@ -119,6 +161,13 @@ public class Interface {
         return Input.untilNumberInput(0, 2);
     }
 
+    private int startPage() {
+       
+        System.out.println("\nWelcome to the main page, pick a game! :)\n");
+        System.out.println("0. Monsters and Legends");
+        System.out.println("1. Legends of Valor");
+        return Input.untilNumberInput(0, 1);
+    }
 
     // create and return party
     public Party createParty() {
@@ -140,7 +189,21 @@ public class Interface {
     }
 
 
-    private void createWorld() {
+    private void createMonsterWorld() {
+        System.out.println("======================");
+        System.out.println("Choose your world row size (8 ~ 16)");
+        int num1 = Input.untilNumberInput(8, 16);
+        if (num1 == -1) {return;}
+        System.out.println("Choose your world column size (8 ~ 16)");
+        int num2 = Input.untilNumberInput(8, 16);
+        if (num2 == -1) {return;}
+        world_r = num1;
+        world_c = num2;
+    }
+
+
+    private void createValorWorld() {
+        // TODO change this to take in column size, row number, number of lanes
         System.out.println("======================");
         System.out.println("Choose your world row size (8 ~ 16)");
         int num1 = Input.untilNumberInput(8, 16);

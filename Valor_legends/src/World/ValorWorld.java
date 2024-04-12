@@ -10,7 +10,7 @@ public class ValorWorld {
     private ArrayList<ArrayList<Spaces>> world;
     private int W_rows;
     private int W_cols;
-    private Coordinate partyCoordinate;
+    private Coordinate partyCoordinate; // change to hash map of key= party value = coords
     private Party myParty;
     private int lanes;
     private int laneWidth;
@@ -115,7 +115,7 @@ public class ValorWorld {
         HashMap<Spaces, Integer> hs = new HashMap<>();
         hs.put(new Common(), 90);
         //hs.put(new StatSpace(), 10);
-        hs.put(new MarketSpace(), 10);  // replace with stat space bc its not done yet
+        hs.put(new MarketSpace(), 10);  //TODO replace with stat space bc its not done yet
         return RandomSelection.KeyProbability(hs);
     }
 
