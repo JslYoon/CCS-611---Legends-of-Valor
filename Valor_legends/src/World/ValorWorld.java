@@ -12,13 +12,16 @@ public class ValorWorld {
     private int W_cols;
     private Coordinate partyCoordinate;
     private Party myParty;
+    private int lanes;
+    private int laneWidth;
 
     private final String[] PARTYREPR = {"|\t O\t|", "|\t/|\\\t|", "|\t/ \\\t|"};
     
-    public ValorWorld(int rows, int cols, Party party, int lanes) {
+    public ValorWorld(int rows, Party party, int lanes, int laneWidth) {
         W_rows = rows;
-        W_cols = cols;
-
+        W_cols = (lanes * (laneWidth + 1)) + 1;
+        this.lanes = lanes;
+        this.laneWidth = laneWidth;
         world = new ArrayList<>();
 
         myParty = party;
@@ -32,7 +35,7 @@ public class ValorWorld {
             temp.add(tempSpace);
             for (int k = 0; k < lanes; k++)
             {
-                for (int j = 1; j < cols; j++) {
+                for (int j = 1; j < laneWidth + 1; j++) {
                     Spaces temp2;
                     if (i == 0) // if enemy nexus
                         temp2 = new Nexus(null, false);
