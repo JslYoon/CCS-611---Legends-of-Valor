@@ -113,9 +113,11 @@ public class ValorWorld {
     // private method to assign tiles randomness in getting the tile type
     private Spaces RandomTiles() {
         HashMap<Spaces, Integer> hs = new HashMap<>();
-        hs.put(new Common(), 90);
-        //hs.put(new StatSpace(), 10);
-        hs.put(new MarketSpace(), 10);  //TODO replace with stat space bc its not done yet
+
+        hs.put(new Common(), 85);
+        hs.put(new Cave(), 5); 
+        hs.put(new Bush(), 5); 
+        hs.put(new Koulou(), 5); 
         return RandomSelection.KeyProbability(hs);
     }
 
