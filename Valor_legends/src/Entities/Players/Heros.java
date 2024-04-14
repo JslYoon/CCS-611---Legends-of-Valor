@@ -67,6 +67,11 @@ public class Heros implements Entities {
         this.beginSpace = beginSpace;
     }
 
+    @Override
+    public int hashCode() {
+        return name.hashCode() + stats.hashCode();
+    }
+
     // ----------------------------------------------------
     // ROLE & LEVELUP
     // ----------------------------------------------------
@@ -101,6 +106,7 @@ public class Heros implements Entities {
     public Items getArmor() { return armor; }
     public Items getWeapon() { return weapon; }
     public Coordinate getBeginSpace() { return beginSpace; }
+    public boolean isPlayer() {return true;}
 
     public void displayStats() {
 

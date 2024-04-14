@@ -5,7 +5,7 @@ import src.Entities.Players.*;
 import src.Misc.Input;
 import src.Misc.RandomSelection;
 
-public class MonsterWorld {
+public class MonsterWorld implements World {
 
     private ArrayList<ArrayList<Spaces>> world;
     private int W_rows;
@@ -104,7 +104,7 @@ public class MonsterWorld {
         partyCoordinate = new Coordinate(0, 0);
     }
 
-    public void moveParty() {
+    public void moveParty(Party p) {
 
         while (true) {
             char c = Input.getMovementInput();
@@ -146,7 +146,7 @@ public class MonsterWorld {
         return world.get(c.getRow()).get(c.getCol());
     }
 
-    public Spaces currPartySpace() {
+    public Spaces currPartySpace(Party p) {
 
         int r = partyCoordinate.getRow();
         int c = partyCoordinate.getCol();

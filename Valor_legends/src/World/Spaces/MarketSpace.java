@@ -36,6 +36,7 @@ public class MarketSpace implements Spaces {
             market.displayMarket((Heros)e);
         }
     }
+    public boolean hasEnemy() { return false; }
 
     public String spaceType() {
         return "Market";

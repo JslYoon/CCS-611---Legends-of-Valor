@@ -9,13 +9,15 @@ import src.Entities.Players.Party;
 import src.Messages.printStatement;
 import src.World.MonsterWorld;
 import src.World.ValorWorld;
+import src.World.World;
+import src.World.Spaces.Spaces;
+import src.World.Spaces.StatSpace;
 
 // Game interface object
 
 public class Interface {
 
-    private MonsterWorld world;
-    private ValorWorld valorWorld;
+    private World world;
     private int world_r = 8;
     private int world_c = 8;
     private int valor_lanes = 2;
@@ -93,7 +95,7 @@ public class Interface {
         world = new MonsterWorld(world_r, world_c, p);
         while(true) {
             System.out.println(world);
-            int nums = playerInputs(p, 'M');
+            int nums = playerInputs(p);
             if (nums == -1) {
                 return;
             }
@@ -102,13 +104,13 @@ public class Interface {
 
     private void startValorGame() {
         System.out.println();
-        valorWorld = new ValorWorld(8, ValorParty, valor_lanes, valor_lane_size);
+        world = new ValorWorld(8, ValorParty, valor_lanes, valor_lane_size);
         while(true) {
             for(int i = 0; i < ValorParty.size(); i++) {
                 Party currparty = ValorParty.get(0);
-                System.out.println(valorWorld);
+                System.out.println(world);
                 System.out.println(currparty.getPartyMembers().get(0).getName() + "'s turn");
-                int nums = playerInputs(currparty, 'V');
+                int nums = playerInputs(currparty);
                 if (nums == -1) {
                     return;
                 }
@@ -118,16 +120,13 @@ public class Interface {
     }
 
     // Player input interface for the actual game
-    private int playerInputs(Party p, char c) {
-        int playerEntry = printStatement.playerMoveOption(world.currPartySpace());
+    private int playerInputs(Party p) {
+        int playerEntry = printStatement.playerMoveOption(world.currPartySpace(p));
         switch(playerEntry) {
             case 0:
                 return -1;
             case 1: // Move party
-                world.moveParty();
-                if(c == 'V'){
-                    // TODO: check for warp and battle
-                }
+                world.moveParty(p);
                 uponplayerMove(p);
                 return 1;
             case 2: // View inventory
@@ -146,11 +145,17 @@ public class Interface {
 
     // Is a method to be called after a player moves
     private void uponplayerMove(Party p) {
-        switch(world.currPartySpace().spaceType()) {
+        Spaces sp = world.currPartySpace(p);
+        switch(sp.spaceType()) {
             case "Common":
                 boolean enterBattle = printStatement.uponCommonSpace();
+                if (RandomSelection.isSuccess(35) || sp.hasEnemy()) {
+                    System.out.println("Monster encounter!!!");
+                    enterBattle = true;
+                }
+                p.debuff(null, 10);
                 if(enterBattle) {
-                    world.currPartySpace().beginAction(p);
+                    world.currPartySpace(p).beginAction(p);
                     if(!p.checkVitals()) {
                         System.out.println("L");
                         System.exit(0);
@@ -159,10 +164,26 @@ public class Interface {
                 break;
             case "Market":
                 boolean enterMarket = printStatement.uponMarketSpace();
+                p.debuff(null, 10);
                 if(enterMarket) {
-                    world.currPartySpace().beginAction(p);
+                    world.currPartySpace(p).beginAction(p);
                 }
                 break;
+            case "Stats":
+                String buffstat = ((StatSpace)sp).statsIncrease();
+                p.buff(buffstat, valor_lane_size);
+                if(sp.hasEnemy()) {
+                    System.out.println("Monster encounter!!!");
+                    world.currPartySpace(p).beginAction(p);
+                    if(!p.checkVitals()) {
+                        System.out.println("L");
+                        System.exit(0);
+                    }
+                }
+                break;
+            case "Nexus":
+                break;
+                
         }
     }
 
@@ -244,6 +265,7 @@ public class Interface {
         if (num2 == -1) {return;}
         valor_lanes = num1;
         valor_lane_size = num2;
+        world_r = 8;
     }
 
     // create hero

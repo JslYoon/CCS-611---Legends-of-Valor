@@ -43,5 +43,6 @@ public class Inaccessible implements Spaces{
         String[] r =  {"|\t  /\\\t|", "|\t /XX\\\t|", "|\t/XXXX\\\t|"};
         return r;
     }
- 
+    public boolean hasEnemy() { return false; }
+
 }

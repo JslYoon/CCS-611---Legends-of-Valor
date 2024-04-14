@@ -24,8 +24,16 @@ public class Bush implements StatSpace {
 
     }
 
+    public boolean hasEnemy() { 
+        if(occupied == null) {
+            return false;
+        }    
+        return !occupied.isGood(); 
+    }
+
+
     public String spaceType() {
-        return "Bush";
+        return "Stats";
     }
 
     public boolean isPartyHere(){
