@@ -26,6 +26,8 @@ public interface Spaces {
 
     public String[] getRepr();
 
+    public boolean hasEnemy();
+
     @Override
     public int hashCode();
 

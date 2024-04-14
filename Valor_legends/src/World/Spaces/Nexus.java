@@ -39,6 +39,8 @@ public class Nexus implements Spaces{
 
     }
 
+    public boolean hasEnemy() { return false; }
+
     public String spaceType() {
         return "Nexus";
     }

@@ -55,10 +55,12 @@ public class Market implements Entities{
 
         });
     }
+    public boolean isPlayer() {return false;}
 
     public String getName() {
         return name;
     }
+    public HashMap<String, Integer> getStats() {return null;}
 
     public int getLevel() { return 999; }
     public int getHP() { return 999; }

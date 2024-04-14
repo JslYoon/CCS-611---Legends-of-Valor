@@ -25,7 +25,7 @@ public class Cave implements StatSpace {
     }
 
     public String spaceType() {
-        return "Cave";
+        return "Stats";
     }
 
     public boolean isPartyHere(){
@@ -33,6 +33,12 @@ public class Cave implements StatSpace {
             return true;
         }
         return false;
+    }
+    public boolean hasEnemy() { 
+        if(occupied == null) {
+            return false;
+        }    
+        return !occupied.isGood(); 
     }
 
     public boolean canMoveto() {

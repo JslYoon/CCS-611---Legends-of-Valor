@@ -50,10 +50,7 @@ public class printStatement {
 
         System.out.println("===============");
         System.out.println("This is common space");
-        if (RandomSelection.isSuccess(35)) {
-            System.out.println("Monster encounter!!!");
-            return true;
-        }
+       
         return false;
 
     }
@@ -73,7 +70,7 @@ public class printStatement {
         System.out.println("===============");
         System.out.println("This is nexus space");
         
-        System.out.println("Would you like to enther this space?");
+        System.out.println("Would you like to enter this space?");
 
         return Input.untilBooleanInput();
 

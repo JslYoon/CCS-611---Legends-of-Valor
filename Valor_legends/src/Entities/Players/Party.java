@@ -10,9 +10,12 @@ import src.Entities.Entities;
 public class Party {
 
     private ArrayList<Entities> party;
+    private boolean buffed;
+    private String buffedString;
     
     public Party(ArrayList<Entities> partiers) {
         party = partiers;
+        buffed = false;
     }
 
     public int partyNum() { return party.size(); }
@@ -38,6 +41,10 @@ public class Party {
         return false;
     }
 
+    public boolean isGood() {
+        return party.get(0).isPlayer();
+    }
+
     // Get the average level of the party
     public int averageLvl() {
         int r = 0;
@@ -57,6 +64,25 @@ public class Party {
         return r;
     }
 
+    public boolean buff(String s, int n) {
+        if(buffed) {
+            changePartyStats(buffedString, -n);
+        }
+        buffedString = s;
+        changePartyStats(s, n);
+        buffed = true;
+        return true;
+    }
+
+    public boolean debuff(String s, int n) {
+        if(!buffed) {
+            return false;
+        }
+        changePartyStats(buffedString, n);
+        buffed = false;
+        return true;
+    }
+
     // View party stats
     public void viewPartyStats() {
         for(Entities e : party) {
@@ -70,7 +96,21 @@ public class Party {
             e.viewInventory();
         }
     }
+
+    public void changePartyStats(String stat, int n) {
+        for(Entities e: party) {
+            e.getStats().put(stat, e.getStats().get(stat) + n);
+        }
+    }
     
+    @Override
+    public int hashCode() {
+        int result = 0;
+        for (Entities entity : party) {
+            result += (entity != null ? entity.hashCode() : 0);
+        }
+        return result;
+    }
 
 
 }

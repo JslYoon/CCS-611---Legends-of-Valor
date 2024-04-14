@@ -1,5 +1,7 @@
 package src.Entities;
 
+import java.util.HashMap;
+
 import src.Inventory.Inventory;
 import src.Inventory.Items.Items;
 
@@ -16,9 +18,9 @@ public interface Entities {
     public int getHP();
     public int getMP();
     public int getGold();
-
+    public HashMap<String, Integer> getStats();
     public void displayStats();
-
+    
     public boolean fightable();
     
     public String toString();
@@ -30,4 +32,6 @@ public interface Entities {
 
     public int Attack(Items i);
     public int Defence(int dmg);
+
+    public boolean isPlayer();
 }

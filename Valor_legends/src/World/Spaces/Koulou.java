@@ -23,9 +23,14 @@ public class Koulou implements StatSpace {
         Behaviors.PlayerVsMonster(p);
 
     }
-
+    public boolean hasEnemy() { 
+        if(occupied == null) {
+            return false;
+        }    
+        return !occupied.isGood(); 
+    }
     public String spaceType() {
-        return "Koulou";
+        return "Stats";
     }
 
     public boolean isPartyHere(){

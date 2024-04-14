@@ -25,7 +25,12 @@ public class Dungeon implements Spaces{
     public boolean canMoveto() {
         return false;
     }
-
+    public boolean hasEnemy() { 
+        if(occupied == null) {
+            return false;
+        }    
+        return !occupied.isGood(); 
+    }
     public boolean isPartyHere() {
         return false;
     }

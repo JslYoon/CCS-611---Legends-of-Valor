@@ -49,7 +49,12 @@ public class Common implements Spaces{
         return true;
     }
 
-
+    public boolean hasEnemy() { 
+        if(occupied == null) {
+            return false;
+        }    
+        return !occupied.isGood(); 
+    }
      public void setCoord(Coordinate c) {
         coord = c;
     }

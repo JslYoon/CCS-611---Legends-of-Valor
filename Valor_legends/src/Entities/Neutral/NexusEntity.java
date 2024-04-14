@@ -1,5 +1,7 @@
 package src.Entities.Neutral;
 
+import java.util.HashMap;
+
 import src.Entities.Entities;
 import src.Entities.Players.Party;
 import src.Inventory.Inventory;
@@ -18,7 +20,8 @@ public class NexusEntity implements Entities{
         this.market = new Inventory();
     }
 
- 
+    public HashMap<String, Integer> getStats() {return null;}
+
 
     public String getName() {
         if(isHeroNexus) {
@@ -27,6 +30,7 @@ public class NexusEntity implements Entities{
             return "Enemy Nexus";
         }
     }
+    public boolean isPlayer() {return false;}
 
 
     public int getLevel() { return 1; }
