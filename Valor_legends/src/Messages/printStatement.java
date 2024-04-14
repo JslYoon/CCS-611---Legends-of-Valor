@@ -39,7 +39,6 @@ public class printStatement {
     }
 
     public static int playerMoveOption(Spaces s) {
-
         System.out.println("0. Quit game");
         System.out.println("1. Move party");
         System.out.println("2. Open inventory");
