@@ -139,6 +139,7 @@ public class ValorWorld implements World {
     public void enemyMove() {
         createMonster();
         moveMonster();
+
     }
 
     public boolean createMonster() {
@@ -164,14 +165,14 @@ public class ValorWorld implements World {
         for (Party mp: monsters) {
             HashMap<Coordinate, Integer> hm = new HashMap<>();
             Coordinate c = mp.getCoord();
-            if(c.downCoord(W_rows, W_cols) != null || CoordtoSpace(c).spaceType().equals("Inaccessible")) {
-                hm.put(c.downCoord(W_rows, W_cols), 50);
+            if(c.downCoord(W_rows, W_cols) != null && CoordtoSpace(c).spaceType().equals("Inaccessible")) {
+                hm.put(c.downCoord(W_rows, W_cols), 60);
             } 
-            if(c.rightCoord(W_rows, W_cols) != null || CoordtoSpace(c).spaceType().equals("Inaccessible")) {
-                hm.put(c.rightCoord(W_rows, W_cols), 25);
+            if(c.rightCoord(W_rows, W_cols) != null && CoordtoSpace(c).spaceType().equals("Inaccessible")) {
+                hm.put(c.rightCoord(W_rows, W_cols), 20);
             }
-            if(c.leftCoord(W_rows, W_cols) != null || CoordtoSpace(c).spaceType().equals("Inaccessible")) {
-                hm.put(c.leftCoord(W_rows, W_cols), 25);
+            if(c.leftCoord(W_rows, W_cols) != null && CoordtoSpace(c).spaceType().equals("Inaccessible")) {
+                hm.put(c.leftCoord(W_rows, W_cols), 20);
             }
             Coordinate cc = RandomSelection.KeyProbability(hm);
             Spaces newspace = CoordtoSpace(cc);

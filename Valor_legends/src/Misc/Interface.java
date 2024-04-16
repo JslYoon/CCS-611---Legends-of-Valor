@@ -117,6 +117,7 @@ public class Interface {
                     if (nums == 1) { break; }
                 }
             }
+            // ((ValorWorld)world).enemyMove();
         }
     }
 
