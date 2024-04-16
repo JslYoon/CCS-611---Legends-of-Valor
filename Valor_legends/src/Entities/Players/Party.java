@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import src.Entities.Entities;
+import src.World.Coordinate;
 
 // java object to represent player party
 
@@ -12,7 +13,8 @@ public class Party {
     private ArrayList<Entities> party;
     private boolean buffed;
     private String buffedString;
-    
+    private Coordinate coordinate;
+    private Coordinate home;
     public Party(ArrayList<Entities> partiers) {
         party = partiers;
         buffed = false;
@@ -112,5 +114,23 @@ public class Party {
         return result;
     }
 
+    public void setCoord(Coordinate coord)
+    {
+        this.coordinate = coord;
+    }
 
+    public Coordinate getCoord()
+    {
+        return coordinate;
+    }
+
+    public void setHome(Coordinate coord)
+    {
+        this.home = coord;
+    }
+
+    public Coordinate getHome()
+    {
+        return home;
+    }
 }

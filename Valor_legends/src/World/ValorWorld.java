@@ -10,14 +10,14 @@ public class ValorWorld implements World {
     private ArrayList<ArrayList<Spaces>> world;
     private int W_rows;
     private int W_cols;
-    private Coordinate partyCoordinate; // change to hash map of key= party value = coords
-    private Party myParty;
+    //private Coordinate partyCoordinate; // TODO change to hash map of key= party value = coords
+    private HashMap<Integer, Party> myParty;
     private int lanes;
     private int laneWidth;
 
     private final String[] PARTYREPR = {"|\t O\t|", "|\t/|\\\t|", "|\t/ \\\t|"};
     
-    public ValorWorld(int rows, Party party, int lanes, int laneWidth) {
+    public ValorWorld(int rows, HashMap<Integer, Party> party, int lanes, int laneWidth) {
         W_rows = rows;
         W_cols = (lanes * (laneWidth + 1)) + 1;
         this.lanes = lanes;
@@ -33,6 +33,7 @@ public class ValorWorld implements World {
             Spaces tempSpace = new Inaccessible();
             tempSpace.setCoord(new Coordinate(i, 0));
             temp.add(tempSpace);
+            int place = 0;
             for (int k = 0; k < lanes; k++)
             {
                 for (int j = 1; j < laneWidth + 1; j++) {
@@ -45,26 +46,26 @@ public class ValorWorld implements World {
                             temp2 = new Nexus(null, true);
                         else
                         {
-                            temp2 = new Nexus(party, true);
+                            temp2 = new Nexus(party.get(place), true);
+                            party.get(place).setCoord(new Coordinate(i, j + (laneWidth + 1) * k));
+                            party.get(place).setHome(new Coordinate(i, j + (laneWidth + 1) * k));
                             hasNexus = true;
+                            place++;
                         }
                     }
                     else
                         temp2 = RandomTiles();
-                    temp2.setCoord(new Coordinate(i, j + 3 * lanes));
+                    temp2.setCoord(new Coordinate(i, j + (laneWidth + 1) * k));
                     temp.add(temp2);
                 }
                 Spaces temp3 = new Inaccessible();
-                temp3.setCoord(new Coordinate(i, 3 + 3 * lanes));
+                temp3.setCoord(new Coordinate(i, (laneWidth + 1) + (laneWidth + 1) * k));
                 temp.add(temp3);
                 hasNexus = false;
             }
 
             world.add(temp);
         }
-        //world.get(0).set(0, new Common(party));
-        //partyCoordinate = new Coordinate(0, 0);
-
     }
 
 
@@ -129,13 +130,9 @@ public class ValorWorld implements World {
     // PARTY MOVEMENT STUFF
     // ----------------------------------------------------
 
-
-    public void setParty(Party p) {
-        world.get(0).set(0, new Common(p));
-        partyCoordinate = new Coordinate(0, 0);
-    }
-
     public void moveParty(Party p) {
+        Coordinate partyCoordinate = p.getCoord();
+
         while (true) {
             char c = Input.getMovementInput();
         
@@ -154,12 +151,6 @@ public class ValorWorld implements World {
                 case 'd': // Move right
                     newCoord = partyCoordinate.rightCoord(W_rows, W_cols);
                     break;
-                case 'r':
-                    // recall
-                    break;
-                case 't':
-                    //tp
-                    break;
                 case 'q': // Quit
                     return;
             }
@@ -170,8 +161,8 @@ public class ValorWorld implements World {
             }
             Spaces newSpace = CoordtoSpace(newCoord);
             CoordtoSpace(partyCoordinate).setOccupied(null);
-            newSpace.setOccupied(myParty);
-            partyCoordinate = newCoord;
+            newSpace.setOccupied(p);
+            p.setCoord(newCoord);
             return;
             
         }
@@ -183,12 +174,23 @@ public class ValorWorld implements World {
     }
 
     public Spaces currPartySpace(Party p) {
-
+        Coordinate partyCoordinate = p.getCoord();
+        System.out.println("sfsssssssssssssss");
+        System.out.println(partyCoordinate.getRow());
+        System.out.println(partyCoordinate.getCol());
         int r = partyCoordinate.getRow();
         int c = partyCoordinate.getCol();
         return world.get(r).get(c);
 
     }
 
-
+    public void recall(Party p)
+    {
+        Coordinate newCoord = p.getHome();
+        Coordinate partyCoordinate = p.getCoord();
+        Spaces newSpace = CoordtoSpace(newCoord);
+        CoordtoSpace(partyCoordinate).setOccupied(null);
+        newSpace.setOccupied(p);
+        p.setCoord(newCoord);
+    }
 }
