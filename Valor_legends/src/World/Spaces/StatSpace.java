@@ -9,5 +9,6 @@ public interface StatSpace extends Spaces {
 
 
     public String statsIncrease();
+    public String spaceName();
 
 }

@@ -16,6 +16,7 @@ public class Bush implements StatSpace {
     public String statsIncrease() {return "dex"; }
     public void setOccupied(Party p) { occupied = p; }
     public Party getOccupied() { return occupied; }
+    public String spaceName() { return "Bush"; }
 
     public void beginAction(Party p) {
 

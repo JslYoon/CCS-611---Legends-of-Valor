@@ -1,6 +1,8 @@
 package src.World;
 import java.util.*;
 import src.World.Spaces.*;
+import src.Entities.Entities;
+import src.Entities.Enemies.Monsters;
 import src.Entities.Players.*;
 import src.Misc.Input;
 import src.Misc.RandomSelection;
@@ -10,13 +12,16 @@ public class ValorWorld implements World {
     private ArrayList<ArrayList<Spaces>> world;
     private int W_rows;
     private int W_cols;
-    //private Coordinate partyCoordinate; // TODO change to hash map of key= party value = coords
+    //private Coordinate partyCoordinate; // TODO change to hash map of key = party value = coords
     private HashMap<Integer, Party> myParty;
     private int lanes;
     private int laneWidth;
+    private ArrayList<Party> monsters = new ArrayList<>();
 
     private final String[] PARTYREPR = {"|\t O\t|", "|\t/|\\\t|", "|\t/ \\\t|"};
-    
+    private final String[] MONSTERREPR = {"|\t /-\\ \t|", "|\t(0_0)\t|", "|\t/| |\\t|"};
+
+
     public ValorWorld(int rows, HashMap<Integer, Party> party, int lanes, int laneWidth) {
         W_rows = rows;
         W_cols = (lanes * (laneWidth + 1)) + 1;
@@ -74,6 +79,7 @@ public class ValorWorld implements World {
     // DISPLAY STUFF
     // ----------------------------------------------------
 
+    public String worldType() { return "Valor"; }
 
     public String toString() {
         String r = " ";
@@ -84,7 +90,11 @@ public class ValorWorld implements World {
                 for(int j = 0; j < world.get(0).size(); j++) {
                     Spaces currSpace = world.get(i).get(j);
                     if(currSpace.isPartyHere()) {
-                        r += PARTYREPR[x];
+                        if(currSpace.getOccupied().isGood()) {
+                            r += PARTYREPR[x];
+                        } else {
+                            r += MONSTERREPR[x];
+                        }
                     } else {
                         r += currSpace.getRepr()[x];
                     }
@@ -122,7 +132,33 @@ public class ValorWorld implements World {
         return RandomSelection.KeyProbability(hs);
     }
 
+    // ----------------------------------------------------
+    // MONSTER STUFF
+    // ----------------------------------------------------
+    public boolean createMonster() {
+        for(int i = 0; i < W_rows; i++) {
+            for(int j = 0; j < W_cols; j++) {
+                Spaces sp = world.get(i).get(j);
+                if(sp.spaceType().equals("Nexus") && !((Nexus)(sp)).getNexus().isHeroNexus()) {
+                    if(RandomSelection.isSuccess(20)) {
+                        ArrayList<Entities> al = new ArrayList<>();
+                        al.add(new Monsters());
+                        Party p = new Party(al);
+                        sp.setOccupied(p);
+                        monsters.add(p);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 
+    public void moveMonster() {
+        for (Party mp: monsters) {
+            
+        }
+    }
     
 
 
@@ -130,7 +166,7 @@ public class ValorWorld implements World {
     // PARTY MOVEMENT STUFF
     // ----------------------------------------------------
 
-    public void moveParty(Party p) {
+    public boolean moveParty(Party p) {
         Coordinate partyCoordinate = p.getCoord();
 
         while (true) {
@@ -152,7 +188,7 @@ public class ValorWorld implements World {
                     newCoord = partyCoordinate.rightCoord(W_rows, W_cols);
                     break;
                 case 'q': // Quit
-                    return;
+                    return false;
             }
            
             if(newCoord == null || CoordtoSpace(newCoord).spaceType().equals("Inaccessible")) {
@@ -163,7 +199,7 @@ public class ValorWorld implements World {
             CoordtoSpace(partyCoordinate).setOccupied(null);
             newSpace.setOccupied(p);
             p.setCoord(newCoord);
-            return;
+            return true;
             
         }
         
@@ -175,9 +211,6 @@ public class ValorWorld implements World {
 
     public Spaces currPartySpace(Party p) {
         Coordinate partyCoordinate = p.getCoord();
-        System.out.println("sfsssssssssssssss");
-        System.out.println(partyCoordinate.getRow());
-        System.out.println(partyCoordinate.getCol());
         int r = partyCoordinate.getRow();
         int c = partyCoordinate.getCol();
         return world.get(r).get(c);

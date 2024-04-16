@@ -107,14 +107,15 @@ public class Interface {
         world = new ValorWorld(8, ValorParty, valor_lanes, valor_lane_size);
         while(true) {
             for(int i = 0; i < ValorParty.size(); i++) {
-                Party currparty = ValorParty.get(0);
-                System.out.println(world);
-                System.out.println(currparty.getPartyMembers().get(0).getName() + "'s turn");
-                int nums = playerInputs(currparty);
-                if (nums == -1) {
-                    return;
+                while(true) {
+                    System.out.println(ValorParty.get(0).getAlivePartyMembers());
+                    Party currparty = ValorParty.get(i);
+                    System.out.println(world);
+                    System.out.println(currparty.getPartyMembers().get(0).getName() + "'s turn");
+                    int nums = playerInputs(currparty);
+                    if (nums == -1) { return; }
+                    if (nums == 1) { break; }
                 }
-                
             }
         }
     }
@@ -126,7 +127,7 @@ public class Interface {
             case 0:
                 return -1;
             case 1: // Move party
-                world.moveParty(p);
+                if (!world.moveParty(p)) {return 0;};
                 uponplayerMove(p);
                 return 1;
             case 2: // View inventory
@@ -137,16 +138,6 @@ public class Interface {
                 System.out.println("Enter any key to continue");
                 Input.scannerInput();
                 return 3;
-            case 4:
-                world.recall(p);
-                // TODO recall
-                break;
-            case 5:
-                System.out.println("Which hero would you like to teleport to?");
-
-                //p.tp();
-                //TODO display available heroes, display legal squares after choosing hero
-                break;
         }
         return -1;
     }
@@ -159,7 +150,7 @@ public class Interface {
         switch(sp.spaceType()) {
             case "Common":
                 boolean enterBattle = printStatement.uponCommonSpace();
-                if (RandomSelection.isSuccess(35) || sp.hasEnemy()) {
+                if (RandomSelection.isSuccess(35) && world.worldType().equals("Monster") || sp.hasEnemy()) {
                     System.out.println("Monster encounter!!!");
                     enterBattle = true;
                 }
@@ -170,6 +161,9 @@ public class Interface {
                         System.out.println("L");
                         System.exit(0);
                     }
+                    p.changePartyStats("hp", 20);
+                    p.changePartyStats("mp", 20);
+
                 }
                 break;
             case "Market":
@@ -181,7 +175,8 @@ public class Interface {
                 break;
             case "Stats":
                 String buffstat = ((StatSpace)sp).statsIncrease();
-                p.buff(buffstat, valor_lane_size);
+                p.buff(buffstat, 10);
+                System.out.println("Entering " + ((StatSpace)sp).spaceName() + " you get " + buffstat + " bonus.");
                 if(sp.hasEnemy()) {
                     System.out.println("Monster encounter!!!");
                     world.currPartySpace(p).beginAction(p);
@@ -189,6 +184,8 @@ public class Interface {
                         System.out.println("L");
                         System.exit(0);
                     }
+                    p.changePartyStats("hp", 20);
+                    p.changePartyStats("mp", 20);
                 }
                 break;
             case "Nexus":
@@ -236,8 +233,8 @@ public class Interface {
     // create and return valor party
     public HashMap<Integer, Party>  createValorParty() {
         HashMap<Integer, Party> tempmap = new HashMap<>();
-        ArrayList<Entities> partiers = new ArrayList<>();
         for(int i = 0; i < valor_lanes; i++) {
+            ArrayList<Entities> partiers = new ArrayList<>();
             System.out.println("Creating hero for lane " + (i+1));
             Entities en = createHero();
             if(en == null) { return null; }

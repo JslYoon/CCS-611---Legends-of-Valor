@@ -32,7 +32,7 @@ public class Nexus implements Spaces{
         occupied = p;
     }
     public Party getOccupied() { return occupied; }
-
+    public NexusEntity getNexus() { return nexus; }
     public void beginAction(Party p) {
         
         

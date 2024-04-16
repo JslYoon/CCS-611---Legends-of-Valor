@@ -15,6 +15,7 @@ public class Party {
     private String buffedString;
     private Coordinate coordinate;
     private Coordinate home;
+
     public Party(ArrayList<Entities> partiers) {
         party = partiers;
         buffed = false;
@@ -68,7 +69,7 @@ public class Party {
 
     public boolean buff(String s, int n) {
         if(buffed) {
-            changePartyStats(buffedString, -n);
+            changePartyStats(buffedString, -1 * n);
         }
         buffedString = s;
         changePartyStats(s, n);
@@ -80,7 +81,7 @@ public class Party {
         if(!buffed) {
             return false;
         }
-        changePartyStats(buffedString, n);
+        changePartyStats(buffedString, n * -1);
         buffed = false;
         return true;
     }

@@ -32,7 +32,7 @@ public class NexusEntity implements Entities{
     }
     public boolean isPlayer() {return false;}
 
-
+    public boolean isHeroNexus() { return isHeroNexus; }
     public int getLevel() { return 1; }
     public int getHP() { return 999; }
     public int getMP() { return 999; }

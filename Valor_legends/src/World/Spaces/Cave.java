@@ -23,6 +23,7 @@ public class Cave implements StatSpace {
         Behaviors.PlayerVsMonster(p);
 
     }
+    public String spaceName() { return "Cave"; }
 
     public String spaceType() {
         return "Stats";
