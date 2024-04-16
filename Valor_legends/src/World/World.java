@@ -5,6 +5,7 @@ import src.World.Spaces.Spaces;
 
 public interface World {
     
-    public void moveParty(Party p);
+    public boolean moveParty(Party p);
     public Spaces currPartySpace(Party p);
+    public String worldType();
 }

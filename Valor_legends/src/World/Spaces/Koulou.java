@@ -16,6 +16,7 @@ public class Koulou implements StatSpace {
     public String statsIncrease() {return "str"; }
     public void setOccupied(Party p) { occupied = p; }
     public Party getOccupied() { return occupied; }
+    public String spaceName() { return "Koulou"; }
 
     public void beginAction(Party p) {
 

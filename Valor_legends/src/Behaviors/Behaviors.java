@@ -8,6 +8,7 @@ import src.Inventory.Inventory;
 import src.Messages.printStatement;
 
 import src.Misc.RandomSelection;
+import src.World.World;
 
 import java.util.*;
 
@@ -142,6 +143,10 @@ public class Behaviors {
                 return;
             }
         }
+    }
+
+    public static void monsterMove(Entities m, World w) {
+        
     }
 
 }

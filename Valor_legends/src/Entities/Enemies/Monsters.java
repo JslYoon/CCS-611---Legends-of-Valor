@@ -43,6 +43,15 @@ public class Monsters implements Entities {
         gold = level * 100;
     }
 
+    public Monsters() {
+        name = "dummy";
+        level = 10;
+        stats.put("hp", 200);
+        stats.put("str", 20);
+        stats.put("def", 20);
+        stats.put("agility", 20);
+    }
+
     public int Attack(Items i) {
         return (int) (stats.get("str") * RandomSelection.getRandomMultiplier() * 10);
     }

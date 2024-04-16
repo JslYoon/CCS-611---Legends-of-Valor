@@ -43,6 +43,7 @@ public class MonsterWorld implements World {
     // DISPLAY STUFF
     // ----------------------------------------------------
 
+    public String worldType() { return "Monster"; }
 
     public String toString() {
         String r = " ";
@@ -104,7 +105,7 @@ public class MonsterWorld implements World {
         partyCoordinate = new Coordinate(0, 0);
     }
 
-    public void moveParty(Party p) {
+    public boolean moveParty(Party p) {
 
         while (true) {
             char c = Input.getMovementInput();
@@ -125,7 +126,7 @@ public class MonsterWorld implements World {
                     newCoord = partyCoordinate.rightCoord(W_rows, W_cols);
                     break;
                 case 'q': // Quit
-                    return;
+                    return false;
             }
            
             if(newCoord == null || CoordtoSpace(newCoord).spaceType().equals("Inaccessible")) {
@@ -136,7 +137,7 @@ public class MonsterWorld implements World {
             CoordtoSpace(partyCoordinate).setOccupied(null);
             newSpace.setOccupied(myParty);
             partyCoordinate = newCoord;
-            return;
+            return true;
             
         }
         
