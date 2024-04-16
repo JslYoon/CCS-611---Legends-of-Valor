@@ -137,16 +137,6 @@ public class Interface {
                 System.out.println("Enter any key to continue");
                 Input.scannerInput();
                 return 3;
-            case 4:
-                world.recall(p);
-                // TODO recall
-                break;
-            case 5:
-                System.out.println("Which hero would you like to teleport to?");
-
-                //p.tp();
-                //TODO display available heroes, display legal squares after choosing hero
-                break;
         }
         return -1;
     }
