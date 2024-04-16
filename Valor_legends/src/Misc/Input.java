@@ -97,6 +97,31 @@ public class Input {
         }
     }
 
+    public static char getValorMovementInput() {
+        System.out.println("Enter 'w' (up), 'a' (left), 's' (down), 'd' (right) to move. Enter 't' to teleport, 'r' to recall. Enter 'q' to quit.");
+        while (true) {
+            String input = scannerInput().toLowerCase();
+            if (input.equals("w") || input.equals("a") || input.equals("s") || input.equals("d") || input.equals("q") || input.equals("t") || input.equals("r")) {
+                return input.charAt(0); 
+            } 
+            System.out.println("Invalid Option");
+            
+        }
+    }
+
+
+    public static char getTeleportMovement() {
+        System.out.println("Enter 'a' (left of hero), 's' (below hero), 'd' (right of hero) to move.");
+        while (true) {
+            String input = scannerInput().toLowerCase();
+            if (input.equals("a") || input.equals("s") || input.equals("d")) {
+                return input.charAt(0); 
+            } 
+            System.out.println("Invalid Option");
+            
+        }
+    }
+
     public static String stringInput() {
         while (true) {
             System.out.println("Enter input. Enter 'q' to quit :( ");

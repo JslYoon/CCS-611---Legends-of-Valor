@@ -12,7 +12,6 @@ public class ValorWorld implements World {
     private ArrayList<ArrayList<Spaces>> world;
     private int W_rows;
     private int W_cols;
-    //private Coordinate partyCoordinate; // TODO change to hash map of key = party value = coords
     private HashMap<Integer, Party> myParty;
     private int lanes;
     private int laneWidth;
@@ -191,7 +190,7 @@ public class ValorWorld implements World {
         Coordinate partyCoordinate = p.getCoord();
 
         while (true) {
-            char c = Input.getMovementInput();
+            char c = Input.getValorMovementInput();
         
             // Calculate potential new coordinates based on the input direction
             Coordinate newCoord = null;
@@ -207,6 +206,17 @@ public class ValorWorld implements World {
                     break;
                 case 'd': // Move right
                     newCoord = partyCoordinate.rightCoord(W_rows, W_cols);
+                    break;
+                case 'r':
+                    newCoord = p.getHome();
+                    break;
+                case 't':
+                    System.out.println("Which hero would you like to teleport to? Enter number between 0 - " + (lanes - 1));
+                    int heroIndex = Input.untilNumberInput(0, lanes - 1);
+                    int x = myParty.get(heroIndex).getCoord().getRow();
+                    int y = myParty.get(heroIndex).getCoord().getCol();
+                    Coordinate temp = new Coordinate(x, y);
+                    newCoord = teleport(temp);
                     break;
                 case 'q': // Quit
                     return false;
@@ -238,13 +248,22 @@ public class ValorWorld implements World {
 
     }
 
-    public void recall(Party p)
+    public Coordinate teleport(Coordinate partyCoordinate)
     {
-        Coordinate newCoord = p.getHome();
-        Coordinate partyCoordinate = p.getCoord();
-        Spaces newSpace = CoordtoSpace(newCoord);
-        CoordtoSpace(partyCoordinate).setOccupied(null);
-        newSpace.setOccupied(p);
-        p.setCoord(newCoord);
+        char c = Input.getTeleportMovement();
+        Coordinate newCoord = null;
+        switch (c) 
+        {
+            case 's': // Move down
+                newCoord = partyCoordinate.downCoord(W_rows, W_cols);
+                break;
+            case 'a': // Move left
+                newCoord = partyCoordinate.leftCoord(W_rows, W_cols);
+                break;
+            case 'd': // Move right
+                newCoord = partyCoordinate.rightCoord(W_rows, W_cols);
+                break;
+        }
+        return newCoord;
     }
 }
