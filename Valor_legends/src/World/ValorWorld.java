@@ -135,6 +135,12 @@ public class ValorWorld implements World {
     // ----------------------------------------------------
     // MONSTER STUFF
     // ----------------------------------------------------
+
+    public void enemyMove() {
+        createMonster();
+        moveMonster();
+    }
+
     public boolean createMonster() {
         for(int i = 0; i < W_rows; i++) {
             for(int j = 0; j < W_cols; j++) {
@@ -156,7 +162,22 @@ public class ValorWorld implements World {
 
     public void moveMonster() {
         for (Party mp: monsters) {
-            
+            HashMap<Coordinate, Integer> hm = new HashMap<>();
+            Coordinate c = mp.getCoord();
+            if(c.downCoord(W_rows, W_cols) != null || CoordtoSpace(c).spaceType().equals("Inaccessible")) {
+                hm.put(c.downCoord(W_rows, W_cols), 50);
+            } 
+            if(c.rightCoord(W_rows, W_cols) != null || CoordtoSpace(c).spaceType().equals("Inaccessible")) {
+                hm.put(c.rightCoord(W_rows, W_cols), 25);
+            }
+            if(c.leftCoord(W_rows, W_cols) != null || CoordtoSpace(c).spaceType().equals("Inaccessible")) {
+                hm.put(c.leftCoord(W_rows, W_cols), 25);
+            }
+            Coordinate cc = RandomSelection.KeyProbability(hm);
+            Spaces newspace = CoordtoSpace(cc);
+            CoordtoSpace(c).setOccupied(null);
+            newspace.setOccupied(mp);
+            mp.setCoord(cc);
         }
     }
     
