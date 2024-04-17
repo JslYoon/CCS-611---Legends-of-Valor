@@ -3,6 +3,7 @@ package src.World.Spaces;
 import src.Behaviors.Behaviors;
 import src.Entities.Players.Party;
 import src.World.Coordinate;
+import src.Misc.Color;
 
 // java object to indicate Cave tile
 
@@ -64,7 +65,7 @@ public class Cave implements StatSpace {
     }
     
     public String[] getRepr() {
-        String[] r =  {"|\t_/ \\_\t|", "|\t/ C \\\t|", "|\t\\___/\t|"};
+        String[] r = {"|" + Color.PURPLE + "\t_/ \\_\t" + Color.RESET + "|", "|" + Color.PURPLE + "\t/ C \\\t" + Color.RESET + "|", "|" + Color.PURPLE + "\t\\___/\t" + Color.RESET + "|"};
         return r;
     }
 

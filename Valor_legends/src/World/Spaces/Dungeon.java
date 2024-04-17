@@ -4,6 +4,7 @@ import javax.swing.text.html.parser.Entity;
 
 import src.Entities.Players.Party;
 import src.World.Coordinate;
+import src.Misc.Color;
 
 // java object to indicate dungeon tile
 
@@ -46,7 +47,7 @@ public class Dungeon implements Spaces{
     public Coordinate getCoord() { return coord; }
 
     public String[] getRepr() {
-        String[] r =  {"|\t  /\\\t|", "|\t /XX\\\t|", "|\t/XXXX\\\t|"};
+        String[] r = {"|" + Color.PURPLE + "\t  /\\\t" + Color.RESET + "|", "|" + Color.PURPLE + "\t /XX\\\t" + Color.RESET + "|", "|" + Color.PURPLE + "\t/XXXX\\\t" + Color.RESET + "|"};
         return r;
     }
  

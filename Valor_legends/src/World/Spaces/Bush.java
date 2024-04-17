@@ -3,6 +3,7 @@ package src.World.Spaces;
 import src.Behaviors.Behaviors;
 import src.Entities.Players.Party;
 import src.World.Coordinate;
+import src.Misc.Color;
 
 // java object to indicate bush tile
 
@@ -66,7 +67,8 @@ public class Bush implements StatSpace {
     }
     
     public String[] getRepr() {
-        String[] r =  {"|\t ~~~\t|", "|\t~[B]~\t|", "|\t ~~~\t|"};
+        String[] r = {"|" + Color.GREEN + "\t ~~~\t" + Color.RESET + "|", "|" + Color.GREEN + "\t~[B]~\t" + Color.RESET + "|", "|" + Color.GREEN + "\t ~~~\t" + Color.RESET + "|"};
+
         return r;
     }
 
