@@ -35,12 +35,18 @@ public class Nexus implements Spaces{
     public NexusEntity getNexus() { return nexus; }
     public void beginAction(Party p) {
         
-        
-
+        for(Entities e: p.getPartyMembers()) {
+            System.out.println(e.getName() + " entering the market");
+            nexus.getMarket().displayMarket((Heros)e);
+        }
     }
 
-    public boolean hasEnemy() { return false; }
-
+    public boolean hasEnemy() { 
+        if(occupied == null) {
+            return false;
+        }    
+        return !occupied.isGood(); 
+    }
     public String spaceType() {
         return "Nexus";
     }
