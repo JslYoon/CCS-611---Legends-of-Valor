@@ -9,9 +9,9 @@ import src.Inventory.Items.Items;
 
 // Java object that represents the nexus entity
 
-public class NexusEntity implements Entities{
+public class NexusEntity implements NeutralEntity{
 
-    private Inventory market;
+    private Market market;
     private boolean isHeroNexus;
     private Party livingEntity;
     private int count;
@@ -20,7 +20,7 @@ public class NexusEntity implements Entities{
         
         this.isHeroNexus = isHeroNexus;
         this.livingEntity = e;
-        this.market = new Inventory();
+        this.market = new Market(e);
         count = 1;
     }
 
@@ -54,8 +54,8 @@ public class NexusEntity implements Entities{
     public int getGold() { return 999999; }
     public boolean fightable() { return true; }
 
-    // getInventory here opens up the market
-    public Inventory getInventory() { return market; }
+    public Market getMarket() {return market;}    
+    public Inventory getInventory() { return null; }
 
     public int Attack(Items i) { return 0; }
     public int Defence(int dmg) { return 0; }

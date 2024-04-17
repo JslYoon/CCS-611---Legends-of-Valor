@@ -150,7 +150,7 @@ public class ValorWorld implements World {
             for(int j = 0; j < W_cols; j++) {
                 Spaces sp = world.get(i).get(j);
                 if(sp.spaceType().equals("Nexus") && !((Nexus)(sp)).getNexus().isHeroNexus() && ((Nexus)(sp)).getNexus().minusCount() ) {
-                    if(RandomSelection.isSuccess(95)) {
+                    if(RandomSelection.isSuccess(50)) {
                         if(sp.isPartyHere()) {
                             return false;
                         }
@@ -158,10 +158,8 @@ public class ValorWorld implements World {
                         al.add(new Monsters());
                         Party p = new Party(al);
                         p.setCoord(new Coordinate(i, j));
-
                         sp.setOccupied(p);
                         monsters.add(p);
-                        return true;
                     }
                 }
             }
@@ -178,10 +176,10 @@ public class ValorWorld implements World {
             if(down != null && !CoordtoSpace(down).spaceType().equals("Inaccessible") && !CoordtoSpace(down).isPartyHere()) {
                 hm.put(down, 60);
             } 
-            if(right != null && !CoordtoSpace(right).spaceType().equals("Inaccessible") && !CoordtoSpace(down).isPartyHere()) {
+            if(right != null && !CoordtoSpace(right).spaceType().equals("Inaccessible") && !CoordtoSpace(right).isPartyHere()) {
                 hm.put(c.rightCoord(W_rows, W_cols), 20);
             }
-            if(left != null && !CoordtoSpace(left).spaceType().equals("Inaccessible") && !CoordtoSpace(down).isPartyHere()) {
+            if(left != null && !CoordtoSpace(left).spaceType().equals("Inaccessible") && !CoordtoSpace(left).isPartyHere()) {
                 hm.put(left, 20);
             }
             if(hm.isEmpty()) {
@@ -193,6 +191,11 @@ public class ValorWorld implements World {
 
             newspace.setOccupied(mp);
             mp.setCoord(cc);
+            if(newspace.spaceType().equals("Nexus") && ((Nexus)newspace).getNexus().isHeroNexus()) {
+                System.out.println(mp + " reached our base, you lost");
+                System.out.println("Try again next time!");
+                System.exit(0);
+            }
         }
     }
     
@@ -206,7 +209,7 @@ public class ValorWorld implements World {
         Coordinate partyCoordinate = p.getCoord();
         while (true) {
             char c = Input.getValorMovementInput();
-        
+            
             // Calculate potential new coordinates based on the input direction
             Coordinate newCoord = null;
             switch (c) {
@@ -222,12 +225,13 @@ public class ValorWorld implements World {
                 case 'd': // Move right
                     newCoord = partyCoordinate.rightCoord(W_rows, W_cols);
                     break;
-                case 'r':
+                case 'r': // recall
                     newCoord = p.getHome();
                     break;
-                case 't':
-                    System.out.println("Which hero would you like to teleport to? Enter number between 0 - " + (lanes - 1));
-                    int heroIndex = Input.untilNumberInput(0, lanes - 1);
+                case 't': // teleport
+                    System.out.println("Which hero would you like to teleport to? Enter number between player in lanes 0 - " + (lanes-1));
+                    int heroIndex = Input.untilNumberInput(0, lanes-1);
+                    if(heroIndex == -1) { return false; }
                     int x = myParty.get(heroIndex).getCoord().getRow();
                     int y = myParty.get(heroIndex).getCoord().getCol();
                     if (x == partyCoordinate.getRow() && y == partyCoordinate.getCol())
@@ -255,6 +259,7 @@ public class ValorWorld implements World {
                 }
                 monsters.remove(CoordtoSpace(newCoord).getOccupied());
             }
+
             Spaces newSpace = CoordtoSpace(newCoord);
             CoordtoSpace(partyCoordinate).setOccupied(null);
             newSpace.setOccupied(p);

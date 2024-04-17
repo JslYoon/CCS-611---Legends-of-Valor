@@ -10,6 +10,7 @@ import src.Messages.printStatement;
 import src.World.MonsterWorld;
 import src.World.ValorWorld;
 import src.World.World;
+import src.World.Spaces.Nexus;
 import src.World.Spaces.Spaces;
 import src.World.Spaces.StatSpace;
 
@@ -152,6 +153,7 @@ public class Interface {
             case "Common":
                 boolean enterBattle = printStatement.uponCommonSpace();
                 p.debuff(null, 10);
+          
                 if (RandomSelection.isSuccess(35) && world.worldType().equals("Monster")) {
                     System.out.println("Monster encounter!!!");
                     enterBattle = true;
@@ -163,6 +165,7 @@ public class Interface {
                         System.exit(0);
                     }
                 }
+                System.out.println("Healing");
                 p.changePartyStats("hp", 20);
                 p.changePartyStats("mp", 20);
                 break;
@@ -177,14 +180,22 @@ public class Interface {
                 String buffstat = ((StatSpace)sp).statsIncrease();
                 p.buff(buffstat, 10);
                 System.out.println("Entering " + ((StatSpace)sp).spaceName() + " you get " + buffstat + " bonus.");
-               
+                System.out.println("Healing");
                 p.changePartyStats("hp", 20);
                 p.changePartyStats("mp", 20);
-                
                 break;
             case "Nexus":
-                boolean enterNexus = printStatement.uponNexusSpace();
                 p.debuff(null, 10);
+                
+                if(!((Nexus)sp).getNexus().isHeroNexus()) {
+                    printStatement.winMessage(p);
+                    System.exit(0);
+                } else {
+                    System.out.println("Nexus arrived, healing");
+                    p.changePartyStats("hp", 20);
+                    p.changePartyStats("mp", 20);
+                }
+                boolean enterNexus = printStatement.uponNexusSpace();
                 if(enterNexus) {
                     world.currPartySpace(p).beginAction(p);
                 }
