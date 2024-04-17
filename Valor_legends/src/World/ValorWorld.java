@@ -158,7 +158,6 @@ public class ValorWorld implements World {
         }
         return false;
     }
-
     public void moveMonster() {
         for (Party mp: monsters) {
             HashMap<Coordinate, Integer> hm = new HashMap<>();
