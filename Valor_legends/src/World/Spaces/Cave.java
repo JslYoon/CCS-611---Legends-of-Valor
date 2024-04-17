@@ -38,7 +38,8 @@ public class Cave implements StatSpace {
     public boolean hasEnemy() { 
         if(occupied == null) {
             return false;
-        }    
+        } 
+        System.out.println(occupied.isGood() + " new1234");
         return !occupied.isGood(); 
     }
 

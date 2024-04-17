@@ -15,10 +15,12 @@ public class Party {
     private String buffedString;
     private Coordinate coordinate;
     private Coordinate home;
+    private boolean ready4battle;
 
     public Party(ArrayList<Entities> partiers) {
         party = partiers;
         buffed = false;
+        ready4battle = false;
     }
 
     public int partyNum() { return party.size(); }
@@ -44,8 +46,26 @@ public class Party {
         return false;
     }
 
+    public boolean isready4battle() { return ready4battle; }
+    public void setreadybattle(boolean battle) { ready4battle = battle;}
+
     public boolean isGood() {
-        return party.get(0).isPlayer();
+        for(Entities e: party) {
+            System.out.println(e + "   " + e.isPlayer());
+            if(!e.isPlayer()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public String toString() {
+        String r = "";
+        for(Entities e: party) {
+            r += e;
+            r += "  ";
+        }
+        return r;
     }
 
     // Get the average level of the party
