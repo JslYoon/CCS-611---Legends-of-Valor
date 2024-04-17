@@ -51,7 +51,6 @@ public class Party {
 
     public boolean isGood() {
         for(Entities e: party) {
-            System.out.println(e + "   " + e.isPlayer());
             if(!e.isPlayer()) {
                 return false;
             }
