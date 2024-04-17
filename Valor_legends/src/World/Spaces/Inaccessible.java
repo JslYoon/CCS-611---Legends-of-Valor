@@ -2,7 +2,8 @@ package src.World.Spaces;
 
 import src.Entities.Players.Party;
 import src.World.Coordinate;
-
+import src.Misc.Color
+;
 // java object to indicate inaccessible tile
 
 public class Inaccessible implements Spaces{
@@ -40,9 +41,10 @@ public class Inaccessible implements Spaces{
     public Coordinate getCoord() { return coord; }
 
     public String[] getRepr() {
-        String[] r =  {"|\t  /\\\t|", "|\t /XX\\\t|", "|\t/XXXX\\\t|"};
+        String[] r =  {"|" + Color.RED + "\t  /\\\t" + Color.RESET + "|", "|" + Color.RED + "\t /XX\\\t" + Color.RESET + "|", "|" + Color.RED + "\t/XXXX\\\t" + Color.RESET + "|"};
         return r;
     }
+
     public boolean hasEnemy() { return false; }
 
 }

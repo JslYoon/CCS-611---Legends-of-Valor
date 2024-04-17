@@ -6,7 +6,7 @@ import src.Entities.Enemies.Monsters;
 import src.Entities.Players.*;
 import src.Misc.Input;
 import src.Misc.RandomSelection;
-
+import src.Misc.Color;
 // Java objects that represents the valor world
 
 public class ValorWorld implements World {
@@ -19,8 +19,8 @@ public class ValorWorld implements World {
     private int laneWidth;
     private ArrayList<Party> monsters;
 
-    private final String[] PARTYREPR = {"|\t O\t|", "|\t/|\\\t|", "|\t/ \\\t|"};
-    private final String[] MONSTERREPR = {"|\t /-\\ \t|", "|\t(0_0)\t|", "|\t/| |\\\t|"};
+    private final String[] PARTYREPR = {"|" + Color.BLUE + "\t O\t" + Color.RESET + "|", "|" + Color.BLUE + "\t/|\\\t" + Color.RESET + "|","|" + Color.BLUE + "\t/ \\\t" + Color.RESET + "|"};
+    private final String[] MONSTERREPR = {"|" + Color.YELLOW + "\t /-\\ \t" + Color.RESET + "|", "|" + Color.YELLOW + "\t(0_0)\t" + Color.RESET + "|", "|" + Color.YELLOW + "\t/| |\\\t" + Color.RESET + "|"};
 
 
     public ValorWorld(int rows, HashMap<Integer, Party> party, int lanes, int laneWidth) {
@@ -230,6 +230,11 @@ public class ValorWorld implements World {
                     int heroIndex = Input.untilNumberInput(0, lanes - 1);
                     int x = myParty.get(heroIndex).getCoord().getRow();
                     int y = myParty.get(heroIndex).getCoord().getCol();
+                    if (x == partyCoordinate.getRow() && y == partyCoordinate.getCol())
+                    {
+                        System.out.println("Cannot teleport to current hero. Try another one.");
+                        continue;
+                    }
                     Coordinate temp = new Coordinate(x, y);
                     newCoord = teleport(temp);
                     break;
@@ -237,7 +242,7 @@ public class ValorWorld implements World {
                     return false;
             }
            
-            if(newCoord == null || CoordtoSpace(newCoord).spaceType().equals("Inaccessible")) {
+            if(newCoord == null || CoordtoSpace(newCoord).spaceType().equals("Inaccessible") ||  CoordtoSpace(newCoord).isPartyHere() == true) {
                 System.out.println("Cannot move in that direction. Try another one.");
                 continue;
             }

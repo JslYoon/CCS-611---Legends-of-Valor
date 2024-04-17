@@ -3,6 +3,7 @@ package src.World.Spaces;
 import src.Behaviors.Behaviors;
 import src.Entities.Players.Party;
 import src.World.Coordinate;
+import src.Misc.Color;
 
 // java object to indicate koulou tile
 
@@ -62,7 +63,8 @@ public class Koulou implements StatSpace {
     }
     
     public String[] getRepr() {
-        String[] r =  {"|\tv v v\t|", "|\tv[K]v\t|", "|\tv v v\t|"};
+        String[] r = {"|" + Color.PURPLE + "\tv v v\t" + Color.RESET + "|", "|" + Color.PURPLE + "\tv[K]v\t" + Color.RESET + "|", "|" + Color.PURPLE + "\tv v v\t" + Color.RESET + "|"};
+
         return r;
     }
 

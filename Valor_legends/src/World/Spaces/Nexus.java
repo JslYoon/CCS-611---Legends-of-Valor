@@ -9,6 +9,7 @@ import src.Entities.Neutral.NexusEntity;
 import src.Entities.Players.Heros;
 import src.Entities.Players.Party;
 import src.World.Coordinate;
+import src.Misc.Color;
 
 // java object to indicate where nexus exists in a tile format
 
@@ -74,7 +75,7 @@ public class Nexus implements Spaces{
     
    
     public String[] getRepr() {
-        String[] r =  {"|\t /\\ \t|", "|\t-[N]-\t|", "|\t \\/ \t|"};
+        String[] r =  {"|" + Color.CYAN + "\t /\\ \t" + Color.RESET + "|", "|" + Color.CYAN + "\t-[N]-\t" + Color.RESET + "|", "|" + Color.CYAN + "\t \\/ \t" + Color.RESET + "|"};
         return r;
     }
 
