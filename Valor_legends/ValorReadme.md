@@ -25,6 +25,7 @@ Entities (directory containing entities. Entities can vary from Heros to monster
         Monsters.java -> object for monsters
     Neutral (neutral entity)
         Market.java -> object for neutral market
+        NexusEntity.java -> for nexus
     Players (player objects)
         Heros.java -> object for heros
         Party.java -> collection of heros, can have up to 4 heros
@@ -34,7 +35,8 @@ Inventory (directory containing inventory objects such as inventory and items)
         Items.java -> interface defining item behaviors
         Armors.java
         Potions.java
-        Spells.java
+        Spells.java 
+        Consumeables.java -> interface for consumeables, eg. spells, potions
         Weapons.java -> these objects define the prospective names of the objects
     Inventory.java -> Inventory objects that takes care of the items
 
@@ -49,7 +51,8 @@ Misc (miscellaneous stuff)
     Interface.java -> for game interface
     Randomeselection.java -> for randomly selecting usage in the game
     Color.java -> strings for chaning the color in our terminal
-
+    Music.java -> for playing music when playing 
+    
 World (directory for creating the world)
 
     Spaces (directory for each tiles of the world)
@@ -58,7 +61,7 @@ World (directory for creating the world)
         Inaccessible.java -> inaccessible space
         MarketSpace.java -> market place
         Koulou.java -> koulou space representation
-        Dungeon.java -> dungeon space representation
+        Dungeon.java -> dummy dungeon space representation never used
         Cave.java -> cave space representation
         Bush.java -> bush space representation
         StatSpace.java -> interface for all other stat buffing spaces to implement
