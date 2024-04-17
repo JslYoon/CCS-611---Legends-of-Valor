@@ -289,7 +289,7 @@ public class Heros implements Entities {
     public void viewInventory() {
        
         System.out.println("=======================");
-        System.out.println("Use an item?");
+        System.out.println("Use an item " + getName() + "?");
         if(Input.untilBooleanInput()) {
             int i2 = inventory.itemList();
             if(i2 == -1) {
@@ -314,7 +314,7 @@ public class Heros implements Entities {
 
     public int Attack(Items i) {
         if(i == null) {
-            return (int)(stats.get("str") * RandomSelection.getRandomMultiplier() + stats.get("agility") * 0.35) * 10;
+            return (int)(stats.get("str") * RandomSelection.getRandomMultiplier() + stats.get("agility") * 0.35) * 3;
         } 
         if (i.getType() == "Spell") {
             changeMP(-150);
@@ -324,7 +324,7 @@ public class Heros implements Entities {
     }
 
     public int Defence(int dmg) {
-        int damage = (int)(dmg * (1 - (stats.get("def") * 0.005 + stats.get("agility") * 0.005)));
+        int damage = (int)(dmg * (1 - (stats.get("def") * 0.009 + stats.get("agility") * 0.008)));
         changeHP(-1 * damage);
         return damage;
     }

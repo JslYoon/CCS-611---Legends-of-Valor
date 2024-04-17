@@ -3,6 +3,7 @@ package src.Messages;
 import java.util.*;
 
 import src.Entities.Entities;
+import src.Entities.Players.Party;
 import src.Misc.Input;
 import src.Misc.RandomSelection;
 import src.World.Spaces.Spaces;
@@ -17,6 +18,9 @@ public class printStatement {
         }
     }
 
+    public static void winMessage(Party p) {
+        System.out.println("Congratulations, " + p + " reached enemy base, we won!");
+    }
 
     public static int battlePrint(Entities e) {
         System.out.println(e + "'s turn. Choose an action");
@@ -70,7 +74,7 @@ public class printStatement {
         System.out.println("===============");
         System.out.println("This is nexus space");
         
-        System.out.println("Would you like to enter this space?");
+        System.out.println("Would you like to enter this nexus market space?");
 
         return Input.untilBooleanInput();
 

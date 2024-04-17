@@ -17,7 +17,7 @@ import java.util.*;
 
 // java object to represent market
 
-public class Market implements Entities{
+public class Market implements NeutralEntity{
 
     private String name;
     private Inventory market;

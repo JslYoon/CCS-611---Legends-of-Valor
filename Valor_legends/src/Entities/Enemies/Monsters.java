@@ -46,7 +46,7 @@ public class Monsters implements Entities {
     public Monsters() {
         stats = new HashMap<>();
 
-        name = "dummy";
+        name = "Scary Monster";
         level = 10;
         stats.put("hp", 200);
         stats.put("str", 20);
@@ -55,11 +55,11 @@ public class Monsters implements Entities {
     }
 
     public int Attack(Items i) {
-        return (int) (stats.get("str") * RandomSelection.getRandomMultiplier() * 10);
+        return (int) (stats.get("str") * RandomSelection.getRandomMultiplier() * 6);
     }
 
     public int Defence(int dmg) {
-        int damage = (int)(dmg * (1 - (stats.get("def") * 0.05 + stats.get("agility") * 0.05)));
+        int damage = (int)(dmg * (1 - (stats.get("def") * 0.09 + stats.get("agility") * 0.09)));
         int updatedHp = stats.get("hp") - damage;
         stats.put("hp", updatedHp <= 0 ? 0 : updatedHp);
         return damage;
