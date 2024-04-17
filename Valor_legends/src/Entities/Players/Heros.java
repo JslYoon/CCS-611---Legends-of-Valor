@@ -314,7 +314,7 @@ public class Heros implements Entities {
 
     public int Attack(Items i) {
         if(i == null) {
-            return (int)(stats.get("str") * RandomSelection.getRandomMultiplier() + stats.get("agility") * 0.35) * 3;
+            return (int)(stats.get("str") * RandomSelection.getRandomMultiplier() + stats.get("agility") * 0.35) * 4;
         } 
         if (i.getType() == "Spell") {
             changeMP(-150);

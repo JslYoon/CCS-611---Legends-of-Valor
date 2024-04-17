@@ -35,10 +35,14 @@ public class Nexus implements Spaces{
     public Party getOccupied() { return occupied; }
     public NexusEntity getNexus() { return nexus; }
     public void beginAction(Party p) {
-        
-        for(Entities e: p.getPartyMembers()) {
-            System.out.println(e.getName() + " entering the market");
-            nexus.getMarket().displayMarket((Heros)e);
+        if(p.isGood() && nexus.isHeroNexus()) {
+            for(Entities e: p.getPartyMembers()) {
+                System.out.println(e.getName() + " entering the market");
+                nexus.getMarket().displayMarket((Heros)e);
+            }
+        } else {
+            System.out.println("You met enemies");
+            Behaviors.PlayerVsMonster(p);
         }
     }
 

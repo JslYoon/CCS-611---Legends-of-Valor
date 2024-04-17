@@ -241,12 +241,16 @@ public class ValorWorld implements World {
                     }
                     Coordinate temp = new Coordinate(x, y);
                     newCoord = teleport(temp);
+                    if(CoordtoSpace(newCoord).isPartyHere() == true) {
+                        System.out.println("Cannot move in that direction. Try another one.");
+                        break;
+                    }
                     break;
                 case 'q': // Quit
                     return false;
             }
            
-            if(newCoord == null || CoordtoSpace(newCoord).spaceType().equals("Inaccessible") ||  CoordtoSpace(newCoord).isPartyHere() == true) {
+            if(newCoord == null || CoordtoSpace(newCoord).spaceType().equals("Inaccessible") ) {
                 System.out.println("Cannot move in that direction. Try another one.");
                 continue;
             }

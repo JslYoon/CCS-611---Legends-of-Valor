@@ -59,7 +59,7 @@ public class Monsters implements Entities {
     }
 
     public int Defence(int dmg) {
-        int damage = (int)(dmg * (1 - (stats.get("def") * 0.09 + stats.get("agility") * 0.09)));
+        int damage = (int)(dmg * (1 - (stats.get("def") * 0.06 + stats.get("agility") * 0.05)));
         int updatedHp = stats.get("hp") - damage;
         stats.put("hp", updatedHp <= 0 ? 0 : updatedHp);
         return damage;

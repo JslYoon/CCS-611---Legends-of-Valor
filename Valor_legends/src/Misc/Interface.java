@@ -1,11 +1,18 @@
 package src.Misc;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import src.Entities.Entities;
 import src.Entities.Players.Heros;
+import src.Entities.Players.Paladin;
 import src.Entities.Players.Party;
+import src.Entities.Players.Sorcerer;
+import src.Entities.Players.Warrior;
 import src.Messages.printStatement;
 import src.World.MonsterWorld;
 import src.World.ValorWorld;
@@ -33,6 +40,15 @@ public class Interface {
         Roles.add("Warrior");
         Roles.add("Sorcerer");
         Roles.add("Paladin");
+        try {
+            String path = "./background.wav";
+            AudioPlayer backgroundMusic = new AudioPlayer(path);
+            backgroundMusic.loop();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
         while(true)
         {
             switch (startPage()) {
@@ -188,6 +204,7 @@ public class Interface {
                 p.debuff(null, 10);
                 
                 if(!((Nexus)sp).getNexus().isHeroNexus()) {
+                    System.out.println(world);
                     printStatement.winMessage(p);
                     System.exit(0);
                 } else {
@@ -299,7 +316,14 @@ public class Interface {
         Heros h  = new Heros(name, s1);;
         switch(s1) {
             case "Warrior":
-                h = new Heros(name, s1);
+                h = new Warrior(name);
+                break;
+            case "Paladin":
+                h = new Paladin(name);
+                break;
+            case "Sorcerer":
+                h = new Sorcerer(name);
+                break;
         }
       
 
