@@ -152,8 +152,6 @@ public class Interface {
             case "Common":
                 boolean enterBattle = printStatement.uponCommonSpace();
                 p.debuff(null, 10);
-                System.out.println(sp.hasEnemy() + " asdfasfd " + sp.isPartyHere());
-                System.out.println(sp.getOccupied());
                 if (RandomSelection.isSuccess(35) && world.worldType().equals("Monster")) {
                     System.out.println("Monster encounter!!!");
                     enterBattle = true;
@@ -164,10 +162,9 @@ public class Interface {
                         System.out.println("L");
                         System.exit(0);
                     }
-                    p.changePartyStats("hp", 20);
-                    p.changePartyStats("mp", 20);
-
                 }
+                p.changePartyStats("hp", 20);
+                p.changePartyStats("mp", 20);
                 break;
             case "Market":
                 boolean enterMarket = printStatement.uponMarketSpace();
@@ -186,8 +183,12 @@ public class Interface {
                 
                 break;
             case "Nexus":
-                break;
-                
+                boolean enterNexus = printStatement.uponNexusSpace();
+                p.debuff(null, 10);
+                if(enterNexus) {
+                    world.currPartySpace(p).beginAction(p);
+                }
+                break;                
         }
     }
 

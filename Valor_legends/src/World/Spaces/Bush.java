@@ -4,6 +4,9 @@ import src.Behaviors.Behaviors;
 import src.Entities.Players.Party;
 import src.World.Coordinate;
 
+// java object to indicate bush tile
+
+
 public class Bush implements StatSpace {
     
     private Coordinate coord;

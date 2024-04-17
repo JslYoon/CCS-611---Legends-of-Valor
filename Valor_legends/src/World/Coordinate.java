@@ -2,6 +2,8 @@ package src.World;
 
 import java.util.Objects;
 
+// Java objects that act as coordinates on a world
+
 public class Coordinate {
     private int x;
     private int y;

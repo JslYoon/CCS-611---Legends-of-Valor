@@ -12,6 +12,9 @@ import src.World.World;
 
 import java.util.*;
 
+
+// Java class that holds non static methods that associate with player behaviors (primarly used for battle for now)
+
 public class Behaviors {
     
 
@@ -144,9 +147,4 @@ public class Behaviors {
             }
         }
     }
-
-    public static void monsterMove(Entities m, World w) {
-        
-    }
-
 }

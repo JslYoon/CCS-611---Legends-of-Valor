@@ -4,6 +4,8 @@ import src.Behaviors.Behaviors;
 import src.Entities.Players.Party;
 import src.World.Coordinate;
 
+// java object to indicate koulou tile
+
 public class Koulou implements StatSpace {
     
     private Coordinate coord;

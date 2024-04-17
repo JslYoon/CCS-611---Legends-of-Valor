@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.util.*;
 
 
+// Java class that holds non static methods for database operations
 
 public class dbOperations {
 

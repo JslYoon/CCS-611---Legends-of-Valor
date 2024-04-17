@@ -4,6 +4,8 @@ import src.Entities.Players.Heros;
 import src.Inventory.Items.Items;
 import src.Misc.*;
 
+// java class that holds non static methods that asks questions
+
 public class QuestionMessage {
     
 

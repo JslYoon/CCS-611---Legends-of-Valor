@@ -7,6 +7,8 @@ import src.Entities.Players.*;
 import src.Misc.Input;
 import src.Misc.RandomSelection;
 
+// Java objects that represents the valor world
+
 public class ValorWorld implements World {
 
     private ArrayList<ArrayList<Spaces>> world;

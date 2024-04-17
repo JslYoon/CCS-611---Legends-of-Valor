@@ -4,6 +4,8 @@ import src.Behaviors.Behaviors;
 import src.Entities.Players.Party;
 import src.World.Coordinate;
 
+// java object to indicate Cave tile
+
 public class Cave implements StatSpace {
     
     private Coordinate coord;

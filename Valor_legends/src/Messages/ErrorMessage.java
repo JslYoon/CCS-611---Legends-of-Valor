@@ -3,6 +3,8 @@ package src.Messages;
 import src.Inventory.Items.Items;
 import src.Misc.Input;
 
+// java class that holds non static methods that print out error messages
+
 public class ErrorMessage {
     
     public static void itemLevelError(Items i) {

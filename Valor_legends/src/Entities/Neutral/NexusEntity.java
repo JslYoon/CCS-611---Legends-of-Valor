@@ -7,6 +7,8 @@ import src.Entities.Players.Party;
 import src.Inventory.Inventory;
 import src.Inventory.Items.Items;
 
+// Java object that represents the nexus entity
+
 public class NexusEntity implements Entities{
 
     private Inventory market;

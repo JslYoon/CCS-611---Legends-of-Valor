@@ -1,5 +1,7 @@
 package src.Misc;
 
+// todo will implement elements if time allows
+
 public class Elements {
 
     private int fire = 0;

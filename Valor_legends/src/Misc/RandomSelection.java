@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+// Java class that holds non-static methods for randomized events
+
 public class RandomSelection {
 
      // Method to select a key based on its weighted probability

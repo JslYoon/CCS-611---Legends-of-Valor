@@ -5,6 +5,8 @@ import src.Entities.Players.*;
 import src.Misc.Input;
 import src.Misc.RandomSelection;
 
+// Java objects that represents the monster world
+
 public class MonsterWorld implements World {
 
     private ArrayList<ArrayList<Spaces>> world;

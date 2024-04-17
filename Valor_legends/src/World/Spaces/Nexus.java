@@ -10,7 +10,7 @@ import src.Entities.Players.Heros;
 import src.Entities.Players.Party;
 import src.World.Coordinate;
 
-// java object to indicate common tile
+// java object to indicate where nexus exists in a tile format
 
 public class Nexus implements Spaces{
 

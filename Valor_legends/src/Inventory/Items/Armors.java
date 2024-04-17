@@ -2,6 +2,8 @@ package src.Inventory.Items;
 import java.util.HashMap;
 
 
+// Java object that represents armors
+
 public class Armors implements Items {
 
     private String name;
