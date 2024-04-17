@@ -44,6 +44,8 @@ public class Monsters implements Entities {
     }
 
     public Monsters() {
+        stats = new HashMap<>();
+
         name = "dummy";
         level = 10;
         stats.put("hp", 200);

@@ -16,10 +16,10 @@ public class ValorWorld implements World {
     private HashMap<Integer, Party> myParty;
     private int lanes;
     private int laneWidth;
-    private ArrayList<Party> monsters = new ArrayList<>();
+    private ArrayList<Party> monsters;
 
     private final String[] PARTYREPR = {"|\t O\t|", "|\t/|\\\t|", "|\t/ \\\t|"};
-    private final String[] MONSTERREPR = {"|\t /-\\ \t|", "|\t(0_0)\t|", "|\t/| |\\t|"};
+    private final String[] MONSTERREPR = {"|\t /-\\ \t|", "|\t(0_0)\t|", "|\t/| |\\\t|"};
 
 
     public ValorWorld(int rows, HashMap<Integer, Party> party, int lanes, int laneWidth) {
@@ -30,7 +30,7 @@ public class ValorWorld implements World {
         world = new ArrayList<>();
 
         myParty = party;
-
+        monsters = new ArrayList<>();
         
         for(int i = 0; i < rows; i++) {
             boolean hasNexus = false;
@@ -138,19 +138,26 @@ public class ValorWorld implements World {
 
     public void enemyMove() {
         createMonster();
-        moveMonster();
-
+        if (RandomSelection.isSuccess(85)) {
+            moveMonster();
+        }
+        
     }
 
     public boolean createMonster() {
         for(int i = 0; i < W_rows; i++) {
             for(int j = 0; j < W_cols; j++) {
                 Spaces sp = world.get(i).get(j);
-                if(sp.spaceType().equals("Nexus") && !((Nexus)(sp)).getNexus().isHeroNexus()) {
-                    if(RandomSelection.isSuccess(20)) {
+                if(sp.spaceType().equals("Nexus") && !((Nexus)(sp)).getNexus().isHeroNexus() && ((Nexus)(sp)).getNexus().minusCount() ) {
+                    if(RandomSelection.isSuccess(95)) {
+                        if(sp.isPartyHere()) {
+                            return false;
+                        }
                         ArrayList<Entities> al = new ArrayList<>();
                         al.add(new Monsters());
                         Party p = new Party(al);
+                        p.setCoord(new Coordinate(i, j));
+
                         sp.setOccupied(p);
                         monsters.add(p);
                         return true;
@@ -165,18 +172,25 @@ public class ValorWorld implements World {
         for (Party mp: monsters) {
             HashMap<Coordinate, Integer> hm = new HashMap<>();
             Coordinate c = mp.getCoord();
-            if(c.downCoord(W_rows, W_cols) != null && CoordtoSpace(c).spaceType().equals("Inaccessible")) {
-                hm.put(c.downCoord(W_rows, W_cols), 60);
+            Coordinate down = c.downCoord(W_rows, W_cols);
+            Coordinate left = c.leftCoord(W_rows, W_cols);
+            Coordinate right = c.rightCoord(W_rows, W_cols);
+            if(down != null && !CoordtoSpace(down).spaceType().equals("Inaccessible") && !CoordtoSpace(down).isPartyHere()) {
+                hm.put(down, 60);
             } 
-            if(c.rightCoord(W_rows, W_cols) != null && CoordtoSpace(c).spaceType().equals("Inaccessible")) {
+            if(right != null && !CoordtoSpace(right).spaceType().equals("Inaccessible") && !CoordtoSpace(down).isPartyHere()) {
                 hm.put(c.rightCoord(W_rows, W_cols), 20);
             }
-            if(c.leftCoord(W_rows, W_cols) != null && CoordtoSpace(c).spaceType().equals("Inaccessible")) {
-                hm.put(c.leftCoord(W_rows, W_cols), 20);
+            if(left != null && !CoordtoSpace(left).spaceType().equals("Inaccessible") && !CoordtoSpace(down).isPartyHere()) {
+                hm.put(left, 20);
+            }
+            if(hm.isEmpty()) {
+                return;
             }
             Coordinate cc = RandomSelection.KeyProbability(hm);
             Spaces newspace = CoordtoSpace(cc);
             CoordtoSpace(c).setOccupied(null);
+
             newspace.setOccupied(mp);
             mp.setCoord(cc);
         }
@@ -190,7 +204,6 @@ public class ValorWorld implements World {
 
     public boolean moveParty(Party p) {
         Coordinate partyCoordinate = p.getCoord();
-
         while (true) {
             char c = Input.getMovementInput();
         
@@ -216,6 +229,15 @@ public class ValorWorld implements World {
             if(newCoord == null || CoordtoSpace(newCoord).spaceType().equals("Inaccessible")) {
                 System.out.println("Cannot move in that direction. Try another one.");
                 continue;
+            }
+            if(CoordtoSpace(newCoord).hasEnemy()) {
+                System.out.println("Monster encounter!!!");
+                CoordtoSpace(newCoord).beginAction(p);
+                if(!p.checkVitals()) {
+                    System.out.println("L");
+                    System.exit(0);
+                }
+                monsters.remove(CoordtoSpace(newCoord).getOccupied());
             }
             Spaces newSpace = CoordtoSpace(newCoord);
             CoordtoSpace(partyCoordinate).setOccupied(null);

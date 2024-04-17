@@ -12,15 +12,28 @@ public class NexusEntity implements Entities{
     private Inventory market;
     private boolean isHeroNexus;
     private Party livingEntity;
+    private int count;
 
     public NexusEntity(Party e, boolean isHeroNexus) {
         
         this.isHeroNexus = isHeroNexus;
         this.livingEntity = e;
         this.market = new Inventory();
+        count = 1;
     }
 
     public HashMap<String, Integer> getStats() {return null;}
+
+    // for monster spawn rate adjustment
+    public void resetCount() { count = 1; }
+    public boolean minusCount() { 
+        count--; 
+        if (count == 0) { 
+            resetCount();
+            return true;
+        }
+        return false;
+    }
 
 
     public String getName() {

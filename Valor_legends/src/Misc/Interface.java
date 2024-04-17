@@ -117,7 +117,7 @@ public class Interface {
                     if (nums == 1) { break; }
                 }
             }
-            // ((ValorWorld)world).enemyMove();
+            ((ValorWorld)world).enemyMove();
         }
     }
 
@@ -151,11 +151,13 @@ public class Interface {
         switch(sp.spaceType()) {
             case "Common":
                 boolean enterBattle = printStatement.uponCommonSpace();
-                if (RandomSelection.isSuccess(35) && world.worldType().equals("Monster") || sp.hasEnemy()) {
+                p.debuff(null, 10);
+                System.out.println(sp.hasEnemy() + " asdfasfd " + sp.isPartyHere());
+                System.out.println(sp.getOccupied());
+                if (RandomSelection.isSuccess(35) && world.worldType().equals("Monster")) {
                     System.out.println("Monster encounter!!!");
                     enterBattle = true;
                 }
-                p.debuff(null, 10);
                 if(enterBattle) {
                     world.currPartySpace(p).beginAction(p);
                     if(!p.checkVitals()) {
@@ -178,16 +180,10 @@ public class Interface {
                 String buffstat = ((StatSpace)sp).statsIncrease();
                 p.buff(buffstat, 10);
                 System.out.println("Entering " + ((StatSpace)sp).spaceName() + " you get " + buffstat + " bonus.");
-                if(sp.hasEnemy()) {
-                    System.out.println("Monster encounter!!!");
-                    world.currPartySpace(p).beginAction(p);
-                    if(!p.checkVitals()) {
-                        System.out.println("L");
-                        System.exit(0);
-                    }
-                    p.changePartyStats("hp", 20);
-                    p.changePartyStats("mp", 20);
-                }
+               
+                p.changePartyStats("hp", 20);
+                p.changePartyStats("mp", 20);
+                
                 break;
             case "Nexus":
                 break;

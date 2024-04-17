@@ -50,10 +50,10 @@ public class Common implements Spaces{
     }
 
     public boolean hasEnemy() { 
-        if(occupied == null) {
-            return false;
+        if(occupied != null) {
+            return !occupied.isGood(); 
         }    
-        return !occupied.isGood(); 
+        return false;
     }
      public void setCoord(Coordinate c) {
         coord = c;
